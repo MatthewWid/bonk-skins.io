@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html>
-	
 	<head>
+		<title>Listings - Bonk-Skins.io</title>
 
-		<title>Bonk-Skins.io</title>
+		<!-- Typefaces -->
+		<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Titillium+Web:700" />
+		<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Roboto" />
+		<script src="https://use.fontawesome.com/12aad66375.js" defer></script>
 
-		<?php
-			include "assets/imports/header.php";
-		?>
+		<!-- Favicon -->
+		<link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="./assets/favicon/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="./assets/favicon/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="./assets/favicon/manifest.json">
+		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="theme-color" content="#ffffff">
 
+		<link rel="stylesheet" href="./styles/css/index.css" />
 	</head>
-
 	<body>
-
 		<div class="header">
-			<span class="title">Bonk Skins</span>
-			<span class="user disabled">MatthewMob <span class="totalScore ">(0)</span></span>
-			<a class="page" href="javascript:void(0);"><i class="fa fa-fire"></i> Hot</a>
-			<a class="page disabled" href="javascript:void(0);"><i class="fa fa-star-o"></i> Top</a>
-			<a class="page disabled" href="javascript:void(0);"><i class="fa fa-tag"></i> New</a>
-			<button id="makeaskin" class="raised">Make a skin</button>
+			<?php
+				include "./assets/imports/logo.php";
+			?>
+			<div class="sort-list">
+				<a class="page" href="javascript:void(0);"><i class="fa fa-tag"></i> New</a>
+				<a class="page" href="javascript:void(0);"><i class="fa fa-star-o"></i> Top</a>
+				<a class="page" href="javascript:void(0);"><i class="fa fa-fire"></i> Hot</a>
+			</div>
+			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
 		<div class="container">
 			<?php
-				$arr = array("deadpool!", "CRY LAUGHING", "idek", "LUL");
-
-				foreach($arr as $key => $value): ?>
-					<a class="card">
-						<img src="http://lorempixel.com/100/100" />
-						<div class="under"><?php echo $value; ?></div>
-					</a>
-				<?php endforeach; ?>
+				include "./backend/getlistings.php";
+			?>
 		</div>
 		<div class="under-content">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
-
 	</body>
-
 </html>
