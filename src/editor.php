@@ -18,9 +18,6 @@
 
 		<!-- Page specific CSS -->
 		<link rel="stylesheet" type="text/css" href="./styles/css/editor.css" />
-		
-		<!-- Editor JavaScript -->
-		<script src="scripts/editor.js" defer></script>
 	</head>
 	<body>
 		<div id="header">
@@ -121,5 +118,8 @@
 			<div id="highlight-text" class="no-select"></div>
 		</div>
 		<canvas id="overallImg"></canvas>
+		
+		<!-- Editor JavaScript -->
+		<script src="scripts/editor.js"></script>
 	</body>
 </html>

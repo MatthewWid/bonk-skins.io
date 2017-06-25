@@ -411,15 +411,13 @@ function submitskin() {
 	}
 
 	// Oh god...
-	var httpRequest;
-	httpRequest = new XMLHttpRequest();
+	var httpRequest = new XMLHttpRequest();
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			if (httpRequest.status === 200) {
 				console.log("Received response successfully - submitskin()");
 
-				var imgHttpRequest;
-				imgHttpRequest = new XMLHttpRequest();
+				var imgHttpRequest = new XMLHttpRequest();
 				imgHttpRequest.onreadystatechange = function() {
 					if (imgHttpRequest.readyState === XMLHttpRequest.DONE) {
 						if (imgHttpRequest.status === 200) {
@@ -453,13 +451,6 @@ function submitskin() {
 	});
 
 	var sendString = "name=" + skin_name + "&author=" + skin_author + "&data=" + skin_data;
-	/*
-	var title = escape(document.getElementById("createHeader").value);
-	var text = escape(document.getElementById("createText").value);
-	var author = escape(document.getElementById("createAuthor").value);
-
-	var sendString = "?title=" + title + "&text=" + text + "&author=" + author;
-	*/
 
 	httpRequest.open("GET", "./backend/saveskin.php?" + sendString);
 	httpRequest.send();
@@ -575,6 +566,7 @@ document.getElementById("downloadimage").addEventListener("click", function(evt)
 /* Event listeners for selecting/changing layer properties */
 
 var editing_property = 0;
+
 // Event listeners on property elements for modification of current layer
 propertiesEl.colour.container.addEventListener("click", function() {
 	if (selectedLayer) {
@@ -1050,4 +1042,35 @@ window.addEventListener("keydown", function(e) {
 	}
 });
 
+// Initialize editable property as the XY property
 propertiesEl.xy.click();
+
+/* Logic for handling URL parameters such as being editable or preloading from an ID */
+
+/*
+var isEditable = !(location.href.split("?")[1].split("&").filter(function(e) {
+	return e.split("=")[0] == "editable";
+})[0].split("=")[1] == "false");
+var skinId = location.href.split("?")[1].split("&").filter(function(e) {
+	return e.split("=")[0] == "id";
+})[0].split("=")[1];
+*/
+
+var url = new URL(location.href);
+if (url.searchParams.get("id")) {
+	var httpRequest = new XMLHttpRequest();
+	httpRequest.onreadystatechange = function() {
+		if (httpRequest.readyState === XMLHttpRequest.DONE) {
+			if (httpRequest.status === 200) {
+				console.log("Received response successfully - .get(\"id\")");
+				console.log(httpRequest.responseText);
+				importskin(httpRequest.responseText);
+			}
+		}
+	}
+	httpRequest.open("GET", "./backend/getskin.php?id=" + url.searchParams.get("id"));
+	httpRequest.send();
+}
+if (url.searchParams.get("editable") != null && url.searchParams.get("editable") == "false") {
+	document.body.classList.add("no-edit");
+}

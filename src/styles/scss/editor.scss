@@ -14,6 +14,24 @@ body {
 	#overallImg {
 		display: none;
 	}
+
+	&.no-edit {
+		#submitskin, #uploadskin {
+			display: none !important;
+		}
+		#container {
+			.container-title, .layer-properties .content .row, #basecolour {
+				pointer-events: none !important;
+				opacity: 0.4 !important;
+			}
+			#property-container-colour {
+				opacity: 1 !important;
+			}
+			.layer-button, .container-tutorial {
+				display: none !important;
+			}
+		}
+	}
 }
 
 $shadow-colour: rgb(172, 172, 172);

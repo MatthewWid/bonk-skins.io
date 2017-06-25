@@ -107,7 +107,9 @@ button, a.button {
     box-shadow: 0 0 5px #acacac, 0 5px 5px #acacac;
     border-radius: 2px;
     transition: transform .2s ease, box-shadow .2s ease;
-    margin: 10px; }
+    margin: 10px;
+    text-decoration: none;
+    color: initial; }
     .container .card .under {
       padding: 0 5px;
       font-size: 14px; }

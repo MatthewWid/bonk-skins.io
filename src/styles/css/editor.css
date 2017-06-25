@@ -11,6 +11,15 @@ body {
   min-width: 330px; }
   body #overallImg {
     display: none; }
+  body.no-edit #submitskin, body.no-edit #uploadskin {
+    display: none !important; }
+  body.no-edit #container .container-title, body.no-edit #container .layer-properties .content .row, body.no-edit #container #basecolour {
+    pointer-events: none !important;
+    opacity: 0.4 !important; }
+  body.no-edit #container #property-container-colour {
+    opacity: 1 !important; }
+  body.no-edit #container .layer-button, body.no-edit #container .container-tutorial {
+    display: none !important; }
 
 button {
   font-family: "Roboto", Arial, sans-serif;
