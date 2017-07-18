@@ -13,13 +13,15 @@ body {
     display: none; }
   body.no-edit #submitskin, body.no-edit #uploadskin {
     display: none !important; }
-  body.no-edit #container .container-title, body.no-edit #container .layer-properties .content .row, body.no-edit #container #basecolour {
+  body.no-edit #container .container-title, body.no-edit #container .layer-properties .content .row {
     pointer-events: none !important;
     opacity: 0.4 !important; }
   body.no-edit #container #property-container-colour {
     opacity: 1 !important; }
   body.no-edit #container .layer-button, body.no-edit #container .container-tutorial {
     display: none !important; }
+  body.no-edit #container #tutorial {
+    display: none; }
 
 button {
   font-family: "Roboto", Arial, sans-serif;
@@ -92,6 +94,12 @@ button {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       -webkit-text-stroke: .6px #000; }
+  #header .user {
+    text-shadow: 0 1px 2px #000;
+    color: #DDD; }
+    #header .user .name {
+      color: #FFF;
+      font-weight: bold; }
 
 .modal {
   position: absolute;

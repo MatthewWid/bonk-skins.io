@@ -5,6 +5,14 @@
 */
 console.clear();
 
+var url = new URL(location.href);
+var editDisabled = false;
+if (url.searchParams.get("editable") != null && url.searchParams.get("editable") == "false") {
+	editDisabled = true;
+	document.body.classList.add("no-edit");
+	document.getElementById("skin-title").disabled = true;
+}
+
 // Retrieve URL of image asset for shape
 // "i" is an index of an image from 1-110
 function getImgUrl(i) {
@@ -15,35 +23,37 @@ function getImgUrl(i) {
 /* Code for generation and editing of layer modal to edit layer shape */
 
 // Create elements for all images and insert them into the shape picker modal
-var shape = {
-	shapes: 110,
-	loadedShapes: 0,
-	shapeListEl: document.querySelector("#shape-picker .list")
-};
-(function() {
-	var imgPreload = [];
-	for (var i = 1; i <= shape.shapes; i++) {
-		imgPreload[i] = new Image();
-		imgPreload[i].src = getImgUrl(i);
-		imgPreload[i].addEventListener("load", function() {
-			shape.loadedShapes++;
-		});
-	}
-})();
-for (var i = 1; i <= shape.shapes; i++) {
-	var shapeItem = document.createElement("div");
-	shapeItem.className = "shape-item";
-	shapeItem.style.backgroundImage = "url(" + getImgUrl(i) + ")";
-	shapeItem.dataset.num = i;
-	shapeItem.addEventListener("click", function() {
-		if (selectedLayer) {
-			selectedLayer.properties.shape = this.dataset.num;
-			drawCanvas(selectedLayer.c.id, selectedLayer);
-			propertiesEl.shape.value.style.backgroundImage = "url(" + getImgUrl(this.dataset.num) + ")";
-			this.parentElement.parentElement.parentElement.classList.add("disabled");
+if (!editDisabled) {
+	var shape = {
+		shapes: 110,
+		loadedShapes: 0,
+		shapeListEl: document.querySelector("#shape-picker .list")
+	};
+	(function() {
+		var imgPreload = [];
+		for (var i = 1; i <= shape.shapes; i++) {
+			imgPreload[i] = new Image();
+			imgPreload[i].src = getImgUrl(i);
+			imgPreload[i].addEventListener("load", function() {
+				shape.loadedShapes++;
+			});
 		}
-	});
-	shape.shapeListEl.appendChild(shapeItem);
+	})();
+	for (var i = 1; i <= shape.shapes; i++) {
+		var shapeItem = document.createElement("div");
+		shapeItem.className = "shape-item";
+		shapeItem.style.backgroundImage = "url(" + getImgUrl(i) + ")";
+		shapeItem.dataset.num = i;
+		shapeItem.addEventListener("click", function() {
+			if (selectedLayer) {
+				selectedLayer.properties.shape = this.dataset.num;
+				drawCanvas(selectedLayer.c.id, selectedLayer);
+				propertiesEl.shape.value.style.backgroundImage = "url(" + getImgUrl(this.dataset.num) + ")";
+				this.parentElement.parentElement.parentElement.classList.add("disabled");
+			}
+		});
+		shape.shapeListEl.appendChild(shapeItem);
+	}
 }
 
 /* Presets and functions for modal for editing layer/background colours */
@@ -107,10 +117,12 @@ function redrawBackground() {
 redrawBackground();
 // "Base colour:" sample event listener
 basecolour_sample.style.backgroundColor = bgLayer.colour;
-document.getElementById("basecolour").addEventListener("click", function() {
-	bgLayer.picking = true;
-	document.getElementById("colour-container").classList.remove("disabled");
-});
+if (!editDisabled) {
+	document.getElementById("basecolour").addEventListener("click", function() {
+		bgLayer.picking = true;
+		document.getElementById("colour-container").classList.remove("disabled");
+	});
+}
 
 /* Functions for organizing, setting, clearing and rendering the layer list, layer properties and layer canvas */
 
@@ -222,67 +234,69 @@ function renderLayerList() {
 			dupe.id = "l-" + layers[i].id;
 			dupe.classList.remove("disabled");
 			dupe.getElementsByClassName("layer-title")[0].textContent = layers[i].name;
-			dupe.getElementsByClassName("rename")[0].addEventListener("click", function(evt) {
-				evt.stopPropagation();
-				var newName = prompt("Rename Layer (Max. 9 Characters)");
-				if (newName.trim().length <= 0) {
-					return false;
-				}
-				layers[i].name = newName.substring(0, 9);
-				if (selectedLayer && layers[i].id === selectedLayer.id) {
-					updateProperties();
-				}
-				renderLayerList();
-			});
-			dupe.getElementsByClassName("clear")[0].addEventListener("click", function(evt) {
-				evt.stopPropagation();
-				layers[i] = initData(i, layers[i].id);
-				if (layers[i].id == selectedLayer.id) {
-					selectedLayer = layers[i];
-					updateProperties();
-				}
-				clearCanvas(layers[i].id);
-				renderLayerList();
-			});
-			dupe.getElementsByClassName("move")[0].addEventListener("click", function(evt) {
-				evt.stopPropagation();
-				if (!movingLayer) {
-					movingLayer = layers[i];
-					this.classList.add("moving");
-				} else {
-					var moveFrom = movingLayer.index;
-					var moveTo = layers[i].index;
-					layers[i].index = moveFrom;
-					movingLayer.index = moveTo;
-					movingLayer = undefined;
-					sortLayerCanvas();
+			if (!editDisabled) {
+				dupe.getElementsByClassName("rename")[0].addEventListener("click", function(evt) {
+					evt.stopPropagation();
+					var newName = prompt("Rename Layer (Max. 9 Characters)");
+					if (newName.trim().length <= 0) {
+						return false;
+					}
+					layers[i].name = newName.substring(0, 9);
+					if (selectedLayer && layers[i].id === selectedLayer.id) {
+						updateProperties();
+					}
 					renderLayerList();
-				}
-			});
-			dupe.getElementsByClassName("copy")[0].addEventListener("click", function(evt) {
-				evt.stopPropagation();
-				if (!copyingLayer) {
-					copyingLayer = layers[i];
-					this.classList.add("moving");
-				} else {
-					var copyFrom = copyingLayer;
-					var copyTo = layers[i];
-					copyTo.name = copyFrom.name;
-					for (var key in copyFrom.properties) {
-						copyTo.properties[key] = copyFrom.properties[key];
+				});
+				dupe.getElementsByClassName("clear")[0].addEventListener("click", function(evt) {
+					evt.stopPropagation();
+					layers[i] = initData(i, layers[i].id);
+					if (layers[i].id == selectedLayer.id) {
+						selectedLayer = layers[i];
+						updateProperties();
 					}
-					for (var key in copyFrom.offset) {
-						copyTo.offset[key] = copyFrom.offset[key];
-					}
-					if (copyTo.properties.shape > 0) {
-						drawCanvas(copyTo.c.id, copyTo);
-					}
-					copyingLayer = undefined;
-					copyTo.el.click();
+					clearCanvas(layers[i].id);
 					renderLayerList();
-					updateProperties();
-				}
-			});
+				});
+				dupe.getElementsByClassName("move")[0].addEventListener("click", function(evt) {
+					evt.stopPropagation();
+					if (!movingLayer) {
+						movingLayer = layers[i];
+						this.classList.add("moving");
+					} else {
+						var moveFrom = movingLayer.index;
+						var moveTo = layers[i].index;
+						layers[i].index = moveFrom;
+						movingLayer.index = moveTo;
+						movingLayer = undefined;
+						sortLayerCanvas();
+						renderLayerList();
+					}
+				});
+				dupe.getElementsByClassName("copy")[0].addEventListener("click", function(evt) {
+					evt.stopPropagation();
+					if (!copyingLayer) {
+						copyingLayer = layers[i];
+						this.classList.add("moving");
+					} else {
+						var copyFrom = copyingLayer;
+						var copyTo = layers[i];
+						copyTo.name = copyFrom.name;
+						for (var key in copyFrom.properties) {
+							copyTo.properties[key] = copyFrom.properties[key];
+						}
+						for (var key in copyFrom.offset) {
+							copyTo.offset[key] = copyFrom.offset[key];
+						}
+						if (copyTo.properties.shape > 0) {
+							drawCanvas(copyTo.c.id, copyTo);
+						}
+						copyingLayer = undefined;
+						copyTo.el.click();
+						renderLayerList();
+						updateProperties();
+					}
+				});
+			}
 			dupe.addEventListener("click", function(e) {
 				selectedLayer = layers[i];
 				document.querySelector(".layer-properties .content").classList.remove("disabled");
@@ -399,10 +413,27 @@ function compileToImage() {
 	return data;
 }
 
+// [a-zA-Z0-9]*_?\s*
 function submitskin() {
+	console.clear();
 	var skin_author = "";
-	while (skin_author.length < 1) {
-		skin_author = escape(prompt("Authors name"));
+	// What is Regex?
+	var allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+	var rejectName = true;
+	while (rejectName) {
+		skin_author = prompt("Authors name\nOnly alphanumeric and underscore. Maximum 16 characters.");
+		if (skin_author && skin_author.length >= 1 && skin_author.length <= 16) {
+			rejectName = false;
+			for (var i = 0; i < skin_author.length; i++) {
+				console.log(skin_author[i]);
+				console.log(allowedChars.indexOf(skin_author[i]));
+				if (allowedChars.indexOf(skin_author[i].toLowerCase()) == -1) {
+					rejectName = true;
+				}
+			}
+		} else if (!skin_author) {
+			return;
+		}
 	}
 	var tempLayers = layers;
 	for (var i = 0; i < tempLayers.length; i++) {
@@ -415,7 +446,12 @@ function submitskin() {
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			if (httpRequest.status === 200) {
+				/*
+					TODO:
+					Redirect to readonly version of skin once skin is submitted.
+				*/
 				console.log("Received response successfully - submitskin()");
+				location.href = "editor?id=" + parseInt(httpRequest.responseText) + "&editable=false";
 
 				var imgHttpRequest = new XMLHttpRequest();
 				imgHttpRequest.onreadystatechange = function() {
@@ -425,22 +461,19 @@ function submitskin() {
 						}
 					}
 				}
-
 				var imgString = compileToImage();
-
 				var form = new FormData();
 				form.append("id", httpRequest.responseText);
 				form.append("img", imgString);
-
 				imgHttpRequest.open("POST", "./backend/saveimg.php");
 				imgHttpRequest.send(form);
 			}
 		}
 	}
 
-	var skin_name = escape(document.getElementById("skin-title").value);
+	var skin_name = document.getElementById("skin-title").value;
 	if (skin_name.length < 1) {
-		name = escape("Bonk_Skin");
+		name = "Bonk_Skin";
 	}
 	var skin_data = JSON.stringify({
 		skinName: skin_name,
@@ -455,11 +488,13 @@ function submitskin() {
 	httpRequest.open("GET", "./backend/saveskin.php?" + sendString);
 	httpRequest.send();
 }
-document.getElementById("submitskin").addEventListener("click", function() {
-	if (checkValidName()) {
-		submitskin();
-	}
-});
+if (!editDisabled) {
+	document.getElementById("submitskin").addEventListener("click", function() {
+		if (checkValidName()) {
+			submitskin();
+		}
+	});
+}
 
 // Variable that sets the skin version - This is updated every time a major change to the format/structure of a layer is made.
 // If a saved skins version differs from this version, the user will receive a warning that their skin may appear incorrect or distorted.
@@ -515,6 +550,8 @@ function importskin(data) {
 			}
 		}
 		document.getElementById("skin-title").value = pData.skinName;
+		document.querySelector("#madeby .name").textContent = pData.author;
+		document.getElementById("madeby").classList.remove("disabled");
 		bgLayer.picking = true;
 		changeColour(pData.baseColour);
 		layers = pData.layers;
@@ -529,22 +566,24 @@ function importskin(data) {
 		updateProperties();
 	}
 }
-// https://codepen.io/MatthewMob/pen/GmVJWx
-document.getElementById("skinuploader").addEventListener("change", function() {
-	var selectedFile = this.files[0];
-	var reader = new FileReader();
-	reader.addEventListener("load", function() {
-		if (selectedFile.name.match(/\.[0-9a-z]+$/i)[0] == ".bskin") {
-			importskin(reader.result);
-		} else {
-			alert("That is not a valid file type!\n\nMust be a .bskin file.")
-		}
+if (!editDisabled) {
+	// https://codepen.io/MatthewMob/pen/GmVJWx
+	document.getElementById("skinuploader").addEventListener("change", function() {
+		var selectedFile = this.files[0];
+		var reader = new FileReader();
+		reader.addEventListener("load", function() {
+			if (selectedFile.name.match(/\.[0-9a-z]+$/i)[0] == ".bskin") {
+				importskin(reader.result);
+			} else {
+				alert("That is not a valid file type!\n\nMust be a .bskin file.")
+			}
+		});
+		reader.readAsText(selectedFile);
 	});
-	reader.readAsText(selectedFile);
-});
-document.getElementById("uploadskin").addEventListener("click", function() {
-	document.getElementById("skinuploader").click();
-});
+	document.getElementById("uploadskin").addEventListener("click", function() {
+		document.getElementById("skinuploader").click();
+	});
+}
 
 document.getElementById("downloadimage").addEventListener("click", function(evt) {
 	if (checkValidName()) {
@@ -566,84 +605,87 @@ document.getElementById("downloadimage").addEventListener("click", function(evt)
 /* Event listeners for selecting/changing layer properties */
 
 var editing_property = 0;
-
-// Event listeners on property elements for modification of current layer
-propertiesEl.colour.container.addEventListener("click", function() {
-	if (selectedLayer) {
-		document.getElementById("colour-container").classList.remove("disabled");
-	}
-});
-propertiesEl.shape.container.addEventListener("click", function() {
-	if (selectedLayer) {
-		document.getElementById("shape-container").classList.remove("disabled");
-	}
-});
-propertiesEl.name.container.addEventListener("click", function() {
-	if (selectedLayer) {
-		var newName = prompt("Rename Layer (Max. 9 Characters)");
-		if (newName.trim().length <= 0) {
-			return false;
+if (!editDisabled) {
+	// Event listeners on property elements for modification of current layer
+	propertiesEl.colour.container.addEventListener("click", function() {
+		if (selectedLayer) {
+			document.getElementById("colour-container").classList.remove("disabled");
 		}
-		selectedLayer.name = newName.substring(0, 9);
-		updateProperties();
-		renderLayerList();
-	}
-});
+	});
+	propertiesEl.shape.container.addEventListener("click", function() {
+		if (selectedLayer) {
+			document.getElementById("shape-container").classList.remove("disabled");
+		}
+	});
+	propertiesEl.name.container.addEventListener("click", function() {
+		if (selectedLayer) {
+			var newName = prompt("Rename Layer (Max. 9 Characters)");
+			if (newName.trim().length <= 0) {
+				return false;
+			}
+			selectedLayer.name = newName.substring(0, 9);
+			updateProperties();
+			renderLayerList();
+		}
+	});
+}
 // Clear red bar from all possible property selections
 function clearSelectedProperties() {
 	propertiesEl.xy.classList.remove("editing");
 	propertiesEl.angle.container.classList.remove("editing");
 	propertiesEl.scale.container.classList.remove("editing");
 }
-// Event listeners for selecting different properties to edit
-propertiesEl.xy.addEventListener("click", function() {
-	editing_property = 1;
-	clearSelectedProperties();
-	this.classList.add("editing");
-});
-propertiesEl.angle.container.addEventListener("click", function() {
-	editing_property = 2;
-	clearSelectedProperties();
-	this.classList.add("editing");
-});
-propertiesEl.scale.container.addEventListener("click", function() {
-	editing_property = 3;
-	clearSelectedProperties();
-	this.classList.add("editing");
-});
-propertiesEl.fliph.container.addEventListener("click", function() {
-	if (selectedLayer) {
-		if (!selectedLayer.properties.fliph) {
-			selectedLayer.properties.fliph = true;
-		} else {
-			selectedLayer.properties.fliph = false;
+if (!editDisabled) {
+	// Event listeners for selecting different properties to edit
+	propertiesEl.xy.addEventListener("click", function() {
+		editing_property = 1;
+		clearSelectedProperties();
+		this.classList.add("editing");
+	});
+	propertiesEl.angle.container.addEventListener("click", function() {
+		editing_property = 2;
+		clearSelectedProperties();
+		this.classList.add("editing");
+	});
+	propertiesEl.scale.container.addEventListener("click", function() {
+		editing_property = 3;
+		clearSelectedProperties();
+		this.classList.add("editing");
+	});
+	propertiesEl.fliph.container.addEventListener("click", function() {
+		if (selectedLayer) {
+			if (!selectedLayer.properties.fliph) {
+				selectedLayer.properties.fliph = true;
+			} else {
+				selectedLayer.properties.fliph = false;
+			}
+			drawCanvas(selectedLayer.c.id, selectedLayer);
+			updateProperties();
 		}
-		drawCanvas(selectedLayer.c.id, selectedLayer);
-		updateProperties();
-	}
-});
-propertiesEl.flipv.container.addEventListener("click", function() {
-	if (selectedLayer) {
-		if (!selectedLayer.properties.flipv) {
-			selectedLayer.properties.flipv = true;
-		} else {
-			selectedLayer.properties.flipv = false;
+	});
+	propertiesEl.flipv.container.addEventListener("click", function() {
+		if (selectedLayer) {
+			if (!selectedLayer.properties.flipv) {
+				selectedLayer.properties.flipv = true;
+			} else {
+				selectedLayer.properties.flipv = false;
+			}
+			drawCanvas(selectedLayer.c.id, selectedLayer);
+			updateProperties();
 		}
-		drawCanvas(selectedLayer.c.id, selectedLayer);
-		updateProperties();
-	}
-});
-propertiesEl.aalias.container.addEventListener("click", function() {
-	if (selectedLayer) {
-		if (!selectedLayer.properties.aalias) {
-			selectedLayer.properties.aalias = true;
-		} else {
-			selectedLayer.properties.aalias = false;
+	});
+	propertiesEl.aalias.container.addEventListener("click", function() {
+		if (selectedLayer) {
+			if (!selectedLayer.properties.aalias) {
+				selectedLayer.properties.aalias = true;
+			} else {
+				selectedLayer.properties.aalias = false;
+			}
+			drawCanvas(selectedLayer.c.id, selectedLayer);
+			updateProperties();
 		}
-		drawCanvas(selectedLayer.c.id, selectedLayer);
-		updateProperties();
-	}
-});
+	});
+}
 
 /* Event listeners and logic for live updating properties */
 
@@ -659,12 +701,14 @@ var e = {
 		y: 0
 	}
 };
-c_container.addEventListener("mousedown", function(evt) {
-	e.mdown = true;
-	document.body.classList.add("no-select");
-	e.init.x = evt.pageX;
-	e.init.y = evt.pageY;
-});
+if (!editDisabled) {
+	c_container.addEventListener("mousedown", function(evt) {
+		e.mdown = true;
+		document.body.classList.add("no-select");
+		e.init.x = evt.pageX;
+		e.init.y = evt.pageY;
+	});
+}
 // Create offsets for layer properties so that each click/button press doesn't reset the property to 0
 // "layer" is a layer object to set the offsets of the provided layer's properties
 function createOffsets(layer) {
@@ -675,47 +719,49 @@ function createOffsets(layer) {
 		selectedLayer.offset.scale = layer.scale;
 	}
 }
-document.addEventListener("mouseup", function() {
-	if (e.mdown) {
-		e.mdown = false;
-		createOffsets(lay);
-		document.body.classList.remove("no-select");
-	}
-});
-// Event listener and logic for dragging to modify selected properties
-document.addEventListener("mousemove", function(evt) {
-	e.current.x = evt.pageX;
-	e.current.y = evt.pageY;
-	if (e.mdown && selectedLayer && editing_property > 0) {
-		switch (editing_property) {
-			case 1:
-				selectedLayer.properties.x = -(e.init.x - e.current.x) + selectedLayer.offset.x
-				selectedLayer.properties.y = -(e.init.y - e.current.y) + selectedLayer.offset.y;
-				break;
-			case 2:
-				//selectedLayer.properties.angle = -(e.init.y - e.current.y) + selectedLayer.offset.angle;
-				
-				/*
-					BUG:
-					Moving the mouse instantly snaps it to the angle it's at relative to the 0 degree.
-					Create an offset of the angle so it doesn't snap, and starts at where the mouse already is.
-				*/
-				
-				var midpoint = {
-					x: c_container.getBoundingClientRect().left + c_container.getBoundingClientRect().width / 2 + selectedLayer.properties.x,
-					y: c_container.getBoundingClientRect().top + c_container.getBoundingClientRect().height / 2 + selectedLayer.properties.y
-				};
-				var theta = parseInt(Math.atan2(e.current.y - midpoint.y, e.current.x - midpoint.x) * 180 / Math.PI);// - parseInt(Math.atan2(e.init.y - midpoint.y, e.init.x - midpoint.x) * 180 / Math.PI);
-				selectedLayer.properties.angle = theta;
-				break;
-			case 3:
-				selectedLayer.properties.scale = parseFloat((((e.init.y - e.current.y) / 100) + selectedLayer.offset.scale).toFixed(2));
-				break;
+if (!editDisabled) {
+	document.addEventListener("mouseup", function() {
+		if (e.mdown) {
+			e.mdown = false;
+			createOffsets(lay);
+			document.body.classList.remove("no-select");
 		}
-		drawCanvas("c-" + selectedLayer.id, layers[selectedLayer.index]);
-		updateProperties();
-	}
-});
+	});
+	// Event listener and logic for dragging to modify selected properties
+	document.addEventListener("mousemove", function(evt) {
+		e.current.x = evt.pageX;
+		e.current.y = evt.pageY;
+		if (e.mdown && selectedLayer && editing_property > 0) {
+			switch (editing_property) {
+				case 1:
+					selectedLayer.properties.x = -(e.init.x - e.current.x) + selectedLayer.offset.x
+					selectedLayer.properties.y = -(e.init.y - e.current.y) + selectedLayer.offset.y;
+					break;
+				case 2:
+					//selectedLayer.properties.angle = -(e.init.y - e.current.y) + selectedLayer.offset.angle;
+					
+					/*
+						BUG:
+						Moving the mouse instantly snaps it to the angle it's at relative to the 0 degree.
+						Create an offset of the angle so it doesn't snap, and starts at where the mouse already is.
+					*/
+					
+					var midpoint = {
+						x: c_container.getBoundingClientRect().left + c_container.getBoundingClientRect().width / 2 + selectedLayer.properties.x,
+						y: c_container.getBoundingClientRect().top + c_container.getBoundingClientRect().height / 2 + selectedLayer.properties.y
+					};
+					var theta = parseInt(Math.atan2(e.current.y - midpoint.y, e.current.x - midpoint.x) * 180 / Math.PI);// - parseInt(Math.atan2(e.init.y - midpoint.y, e.init.x - midpoint.x) * 180 / Math.PI);
+					selectedLayer.properties.angle = theta;
+					break;
+				case 3:
+					selectedLayer.properties.scale = parseFloat((((e.init.y - e.current.y) / 100) + selectedLayer.offset.scale).toFixed(2));
+					break;
+			}
+			drawCanvas("c-" + selectedLayer.id, layers[selectedLayer.index]);
+			updateProperties();
+		}
+	});
+}
 
 /* Logic and rendering for drawing on preview */
 
@@ -915,11 +961,13 @@ function showNext() {
 	highlighting.inUse = true;
 	highlight(highlighting.e, steps[stepsInc].text, steps[stepsInc].offsetleft)
 }
-// When "Guided Tutorial" is clicked clear all layers and start the first step in the array of tutorial steps
-document.getElementById("tutorial").addEventListener("click", function() {
-	generateNewLayers();
-	showNext();
-});
+if (!editDisabled) {
+	// When "Guided Tutorial" is clicked clear all layers and start the first step in the array of tutorial steps
+	document.getElementById("tutorial").addEventListener("click", function() {
+		generateNewLayers();
+		showNext();
+	});
+}
 // When the highlight overlay is clicked go to the next step in the tutorial or end the tutorial if we've reached the end of the tutorial steps array
 function progressStep() {
 	if(stepsInc + 1 < steps.length) {
@@ -930,13 +978,15 @@ function progressStep() {
 		generateNewLayers();
 	}
 }
-document.getElementById("highlight-container").addEventListener("click", progressStep);
-// Event listener that dynamically redraws highlights as the window resizes
-window.addEventListener("resize", function() {
-	if (highlighting.inUse) {
-		highlight(highlighting.e, steps[stepsInc].text);
-	}
-});
+if (!editDisabled) {
+	document.getElementById("highlight-container").addEventListener("click", progressStep);
+	// Event listener that dynamically redraws highlights as the window resizes
+	window.addEventListener("resize", function() {
+		if (highlighting.inUse) {
+			highlight(highlighting.e, steps[stepsInc].text);
+		}
+	});
+}
 // When an arrow key is pressed then modify the selected property
 // "e" is a keydown event object
 function keyMoveProperty(e) {
@@ -985,61 +1035,63 @@ function keyMoveProperty(e) {
 
 /* Quality of life shortcuts/hotkeys */
 
+if (!editDisabled) {
 // Click X or background of modal to close it
-document.querySelectorAll(".modal .close").forEach(function(e) {
-	e.addEventListener("click", function() {
-		e.parentElement.parentElement.parentElement.classList.toggle("disabled");
-		bgLayer.picking = false;
+	document.querySelectorAll(".modal .close").forEach(function(e) {
+		e.addEventListener("click", function() {
+			e.parentElement.parentElement.parentElement.classList.toggle("disabled");
+			bgLayer.picking = false;
+		});
 	});
-});
-document.querySelectorAll(".modal .bg").forEach(function(e) {
-	e.addEventListener("click", function() {
-		e.parentElement.classList.add("disabled");
-		bgLayer.picking = false;
+	document.querySelectorAll(".modal .bg").forEach(function(e) {
+		e.addEventListener("click", function() {
+			e.parentElement.classList.add("disabled");
+			bgLayer.picking = false;
+		});
 	});
-});
+	window.addEventListener("keydown", function(e) {
+		if (highlighting.inUse && e.keyCode == 32) {
+			e.preventDefault();
+			progressStep();
+		} else if (e.keyCode == 27) {
+			if (highlighting.inUse) {
+				e.preventDefault();
+				stepsInc = steps.length;
+				progressStep();
+			}
+			if (!document.getElementById("shape-container").classList.contains("disabled")) {
+				document.getElementById("shape-container").classList.add("disabled");
+			}
+			if (!document.getElementById("colour-container").classList.contains("disabled")) {
+				document.getElementById("colour-container").classList.add("disabled");
+			}
+		} else if (selectedLayer) {
+			switch (e.keyCode) {
+				case 49:
+					e.preventDefault();
+					document.getElementById("property-selectable-xy").click();
+					return;
+					break;
+				case 50:
+					e.preventDefault();
+					document.getElementById("property-container-angle").click();
+					return;
+					break;
+				case 51:
+					e.preventDefault();
+					document.getElementById("property-container-scale").click();
+					return;
+					break;
+			}
+			keyMoveProperty(e);
+		}
+	});
+}
 // Collapse sections when clicking their header
 document.querySelectorAll(".section .header").forEach(function(e) {
 	e.addEventListener("click", function() {
 		e.parentElement.classList.toggle("collapsed");
 	});
-});
-window.addEventListener("keydown", function(e) {
-	if (highlighting.inUse && e.keyCode == 32) {
-		e.preventDefault();
-		progressStep();
-	} else if (e.keyCode == 27) {
-		if (highlighting.inUse) {
-			e.preventDefault();
-			stepsInc = steps.length;
-			progressStep();
-		}
-		if (!document.getElementById("shape-container").classList.contains("disabled")) {
-			document.getElementById("shape-container").classList.add("disabled");
-		}
-		if (!document.getElementById("colour-container").classList.contains("disabled")) {
-			document.getElementById("colour-container").classList.add("disabled");
-		}
-	} else if (selectedLayer) {
-		switch (e.keyCode) {
-			case 49:
-				e.preventDefault();
-				document.getElementById("property-selectable-xy").click();
-				return;
-				break;
-			case 50:
-				e.preventDefault();
-				document.getElementById("property-container-angle").click();
-				return;
-				break;
-			case 51:
-				e.preventDefault();
-				document.getElementById("property-container-scale").click();
-				return;
-				break;
-		}
-		keyMoveProperty(e);
-	}
 });
 
 // Initialize editable property as the XY property
@@ -1056,21 +1108,16 @@ var skinId = location.href.split("?")[1].split("&").filter(function(e) {
 })[0].split("=")[1];
 */
 
-var url = new URL(location.href);
 if (url.searchParams.get("id")) {
 	var httpRequest = new XMLHttpRequest();
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			if (httpRequest.status === 200) {
 				console.log("Received response successfully - .get(\"id\")");
-				console.log(httpRequest.responseText);
 				importskin(httpRequest.responseText);
 			}
 		}
 	}
 	httpRequest.open("GET", "./backend/getskin.php?id=" + url.searchParams.get("id"));
 	httpRequest.send();
-}
-if (url.searchParams.get("editable") != null && url.searchParams.get("editable") == "false") {
-	document.body.classList.add("no-edit");
 }

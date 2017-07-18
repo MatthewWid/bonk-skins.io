@@ -24,6 +24,7 @@
 			<?php
 				include "./assets/imports/logo.php";
 			?>
+			<span class="user disabled" id="madeby">Made by <span class="name">MatthewMob</span></span>
 			<div>
 				<button id="submitskin" class="raised" title="Save your skin to the database">Submit Skin</button>
 				<div class="portbuttons">
@@ -56,7 +57,7 @@
 		</div>
 		<div id="container">
 			<div class="container-title">
-				<input type="text" id="skin-title" placeholder="Name of skin" maxlength="17" minlength="3" required title="" />
+				<input type="text" id="skin-title" placeholder="Name of skin" maxlength="16" minlength="1" required title="" />
 				<i id="pencil-icon" class="fa fa-flip-horizontal fa-pencil flashred1" aria-hidden="true"></i>
 			</div>
 			<div class="container-flex">

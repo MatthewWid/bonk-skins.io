@@ -35,7 +35,7 @@
 				include "./backend/getlistings.php";
 			?>
 		</div>
-		<div class="under-content">
+		<div class="under-content disabled">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
 	</body>
