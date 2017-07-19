@@ -1,1 +1,1 @@
-<a id="logo" class="title" href="http://localhost/bonk-skins.io/src/">Bonk Skins.</a>
+<a id="logo" class="title" href="index.php">Bonk Skins.</a>

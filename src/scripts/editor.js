@@ -552,6 +552,7 @@ function importskin(data) {
 		document.getElementById("skin-title").value = pData.skinName;
 		document.querySelector("#madeby .name").textContent = pData.author;
 		document.getElementById("madeby").classList.remove("disabled");
+		document.getElementsByTagName("title")[0].innerHTML = pData.skinName + " - Bonk-Skins.io";
 		bgLayer.picking = true;
 		changeColour(pData.baseColour);
 		layers = pData.layers;
