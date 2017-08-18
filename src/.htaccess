@@ -1,6 +1,8 @@
 RewriteEngine	On
 RewriteRule	^$	index.php	[NC,L] # Redirect root directory to index.php
 
-RewriteRule	^editor/?$	editor.php	[NC,L] # Redirect /editor/ or /editor to editor.php
+RewriteRule	^editor$	editor.php	[NC,L] # Redirect /editor to editor.php
+
+RewriteRule	^delete$	delete.php	[NC,L] # Redirect /delete to delete.php
 
 RewriteRule	^u(ser)?/?$	user.php	[NC,L] # Redirect /u/ or /u/user to user.php

@@ -1,1 +1,1 @@
-<a id="logo" class="title" href="index.php">Bonk Skins.</a>
+<a id="logo" class="title" href="./">Bonk Skins.</a>

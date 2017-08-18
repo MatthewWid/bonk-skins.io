@@ -1,30 +1,6 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-$soft-bg-colour: rgb(238, 238, 238);
-body {
-	background: $soft-bg-colour;
-	font-family: "Roboto", Arial, sans-serif;
-	font-size: 18px;
-	overflow-x: hidden;
-	min-width: 330px;
-}
+@import "base.scss";
 
-$shadow-colour: rgb(172, 172, 172);
-$gradient-overlay: linear-gradient(to bottom right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0));
 button, a.button {
-	font-family: "Roboto", Arial, sans-serif;
-	font-size: 18px;
-	border-radius: 3px;
-	border: none;
-	color: #FFF;
-	height: 36px;
-	padding: 0 16px;
-	outline: none;
-	cursor: pointer;
-	
 	&#makeaskin {
 		background: $gradient-overlay, rgb(148, 101, 84);
 	    line-height: 200%;
@@ -33,65 +9,9 @@ button, a.button {
 	&#loadmore {
 		color: #009688;
 	}
-	&.flat {
-		background: none;
-	}
-	&.raised {
-		box-shadow: 0 0 4px #525252, 0 2px 3px #525252;
-		transition: box-shadow .2s ease;
-
-		&:hover {
-			box-shadow: 0 0 5px 1px #525252, 0 3px 3px #525252;
-		}
-	}
 }
 
-.disabled {
-	display: none !important;
-}
-
-$header-colour: #009688;
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	
-	background-color: $header-colour;
-	height: 64px;
-	padding: 0 20px;
-	color: #FFF;
-	box-shadow: 0 4px 5px #ccc;
-	
-	.title {
-		font-family: 'Titillium Web', sans-serif;
-		font-size: 26px;
-		text-shadow: 0 0 4px #000;
-		color: #FFF !important;
-		text-decoration: none !important;
-
-		&:after {
-			content: "io"; // ߷
-			text-shadow: none;
-			background: repeating-linear-gradient(
-				to bottom right,
-				rgb(255, 0, 51),
-				rgb(255, 0, 51) 25%, // Red
-				rgb(255, 128, 0) 25%,
-				rgb(255, 128, 0) 35%, // Orange
-				rgb(255, 230, 0) 35%,
-				rgb(255, 230, 0) 50%, // Yellow
-				rgb(26, 179, 77) 50%,
-				rgb(26, 179, 77) 65%, // Green
-				rgb(26, 102, 255) 65%,
-				rgb(26, 102, 255) 75%, // Blue
-				rgb(128, 28, 179) 75%,
-				rgb(128, 28, 179) 100% // Purple
-			);
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			-webkit-text-stroke: .6px #000;
-		}
-	}
+#header {
 	.user {
 		text-shadow: 0 1px 2px #000;
 		font-weight: bold;
@@ -108,7 +28,7 @@ $header-colour: #009688;
 	    transform: translateX(-50%);
 	    max-height: 26px;
 	    overflow-y: hidden;
-	    background-color: $header-colour;
+	    background-color: $header-background;
 	    padding: 0 15px;
 	    border-bottom-left-radius: 5px;
 	    border-bottom-right-radius: 5px;

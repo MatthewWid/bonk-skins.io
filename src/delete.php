@@ -16,7 +16,7 @@
 		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
 		<meta name="theme-color" content="#ffffff">
 
-		<link rel="stylesheet" href="./styles/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="./styles/css/index.css" />
 	</head>
 	<body>
 		<div class="header">
