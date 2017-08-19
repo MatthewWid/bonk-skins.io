@@ -3,8 +3,8 @@
 button, a.button {
 	&#makeaskin {
 		background: $gradient-overlay, rgb(148, 101, 84);
-	    line-height: 200%;
-	    text-decoration: none;
+		line-height: 200%;
+		text-decoration: none;
 	}
 	&#loadmore {
 		color: #009688;
@@ -22,21 +22,17 @@ button, a.button {
 		}
 	}
 	.sort-list {
-		position: absolute;
-	    top: 16px;
-	    left: 50%;
-	    transform: translateX(-50%);
 	    max-height: 26px;
 	    overflow-y: hidden;
 	    background-color: $header-background;
 	    padding: 0 15px;
 	    border-bottom-left-radius: 5px;
 	    border-bottom-right-radius: 5px;
-	    transition: max-height 2s ease;
+	    //transition: max-height 2s ease;
 
 		&:hover {
-			max-height: 999%;
-			overflow-y: visible;
+			//max-height: 999%;
+			//overflow-y: visible;
 		}
 		.page {
 			text-shadow: 0 1px 2px #000;
@@ -51,6 +47,39 @@ button, a.button {
 			&:hover {
 				color: #d2d2d2;
 			}
+		}
+	}
+	.search-container {
+		position: relative;
+		font-size: 14px;
+		cursor: text;
+
+		#search-bar {
+			color: #FFF;
+			background-color: #00756a;
+			border: none;
+			border-bottom: 3px solid #008275;
+			border-radius: 15px;
+			outline: none;
+			padding: 5px 15px;
+			
+			&:focus + .search-placeholder, &:valid + .search-placeholder {
+				display: none;
+			}
+		}
+		.search-placeholder {
+			color: #CCC;
+			pointer-events: none;
+			position: absolute;
+			top: 0;
+			left: 15px;
+		}
+		&:after {
+			font-family: FontAwesome;
+			content: "\f002";
+			position: absolute;
+			top: 0;
+			right: 15px;
 		}
 	}
 }

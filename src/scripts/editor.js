@@ -850,6 +850,20 @@ function clearCanvas(i) {
 	ctx.clearRect(0, 0, c.width, c.height);
 }
 
+// Clears and re-draws all layer canvasses
+// This function is very broken right. DO NOT USE.
+function forceDrawAll() {
+	var layerEls = document.querySelectorAll("#c-bg ~ [id^=\"c-\"]");
+	for (var i = 0; i < layers.length; i++) {
+		clearCanvas(i);
+		if (layers[i].properties.shape > 0) {
+			drawCanvas("c-" + i, layers[i]);
+		}
+	}
+	sortLayerCanvas();
+	console.log("bonk-skins.io: forceDrawAll: Redrawn all layers successfully");
+}
+
 /* Tutorial logic and drawing */
 
 // Object containing elements for highlighting

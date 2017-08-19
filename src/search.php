@@ -1,3 +1,10 @@
+<?php
+	if (!ISSET($_GET["q"])) {
+		header("Location: ./");
+		die();
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,7 +36,7 @@
 				<a class="page disabled" href="javascript:void(0);"><i class="fa fa-fire"></i> Hot</a>
 			</div>
 			<div class="search-container">
-				<input id="search-bar" type="text" maxlength="16" minlength="1" required />
+				<input id="search-bar" type="text" maxlength="16" minlength="1" required value="<?php echo $_GET["q"]; ?>" />
 				<div class="search-placeholder">Search...</div>
 			</div>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>

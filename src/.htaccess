@@ -5,4 +5,6 @@ RewriteRule	^editor$	editor.php	[NC,L] # Redirect /editor to editor.php
 
 RewriteRule	^delete$	delete.php	[NC,L] # Redirect /delete to delete.php
 
+RewriteRule	^search$	search.php	[NC,L] # Redirect /search to search.php
+
 RewriteRule	^u(ser)?/?$	user.php	[NC,L] # Redirect /u/ or /u/user to user.php
