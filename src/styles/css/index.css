@@ -112,12 +112,14 @@ button#loadmore, a.button#loadmore {
     position: absolute;
     top: 0;
     left: 15px; }
-  #header .search-container:after {
-    font-family: FontAwesome;
-    content: "\f002";
+  #header .search-container #search-button {
     position: absolute;
     top: 0;
-    right: 15px; }
+    right: 15px;
+    cursor: pointer; }
+    #header .search-container #search-button:active {
+      font-size: 12px;
+      top: 1px; }
 
 .container {
   display: flex;

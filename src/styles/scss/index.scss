@@ -74,12 +74,16 @@ button, a.button {
 			top: 0;
 			left: 15px;
 		}
-		&:after {
-			font-family: FontAwesome;
-			content: "\f002";
+		#search-button {
 			position: absolute;
 			top: 0;
 			right: 15px;
+			cursor: pointer;
+
+			&:active {
+				font-size: 12px;
+				top: 1px;
+			}
 		}
 	}
 }

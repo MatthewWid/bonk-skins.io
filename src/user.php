@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Listings - Bonk-Skins.io</title>
+		<title>User - Bonk-Skins.io</title>
 
 		<!-- Typefaces -->
 		<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Titillium+Web:700" />

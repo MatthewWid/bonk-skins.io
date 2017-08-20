@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Listings - Bonk-Skins.io</title>
+		<title>"<?php echo $_GET["q"] ?>" - Bonk-Skins.io</title>
 
 		<!-- Typefaces -->
 		<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Titillium+Web:700" />
@@ -35,10 +35,9 @@
 				<a class="page disabled" href="javascript:void(0);"><i class="fa fa-star-o"></i> Top</a>
 				<a class="page disabled" href="javascript:void(0);"><i class="fa fa-fire"></i> Hot</a>
 			</div>
-			<div class="search-container">
-				<input id="search-bar" type="text" maxlength="16" minlength="1" required value="<?php echo $_GET["q"]; ?>" />
-				<div class="search-placeholder">Search...</div>
-			</div>
+			<?php
+				include "./assets/imports/search.php";
+			?>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
 		<div class="container">
