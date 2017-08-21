@@ -1,30 +1,27 @@
 <?php
-	include "./assets/imports/config.php";
+	include __DIR__ . "/../assets/imports/config.php";
 	$con = mysqli_connect($server_ip, $server_user, $server_password, $server_db);
 
 	function renderListings($sql) {
 		if (mysqli_num_rows($sql) != 0) {
 			while ($row = mysqli_fetch_array($sql)) {
-				echo "<a class=\"card\" href=\"editor?id=" . $row["skin_id"] . "&editable=false\">
-					<img src=\"./backend/previews/" . $row["skin_id"] . ".png\" width=\"150\" />
-					<div class=\"under\">
+				echo "<div class=\"card\">
+					<a class=\"card-image\" href=\"editor?id=" . $row["skin_id"] . "&editable=false\">
+						<img src=\"./backend/previews/" . $row["skin_id"] . ".png\" width=\"150\" />
+					</a>
+					<div class=\"card-details\">
 						<p>" . $row["skin_name"] . "</p>
 						<p class=\"author\">" . $row["skin_author"] . "</p>
 					</div>
-				</a>";
+				</div>";
 			}
 		} else {
 			echo "No results found.";
 		}
 	}
 
-	if (!ISSET($_GET["q"])) {
-		$sql = mysqli_query($con, "SELECT * FROM skins ORDER BY skin_creation DESC");
+	$search = (ISSET($_GET["q"])) ? ("WHERE skin_name LIKE \"%" . $_GET["q"] . "%\" OR skin_author LIKE \"%" . $_GET["q"] . "%\"") : "";
+	$sql = mysqli_query($con, "SELECT skin_id, skin_name, skin_author FROM skins " . $search . " ORDER BY skin_creation DESC");
 
-		renderListings($sql);
-	} else {
-		$sql = mysqli_query($con, "SELECT * FROM skins WHERE skin_name LIKE \"%" . $_GET["q"] . "%\" OR skin_author LIKE \"%" . $_GET["q"] . "%\" ORDER BY skin_creation DESC");
-
-		renderListings($sql);
-	}
+	renderListings($sql);
 ?>

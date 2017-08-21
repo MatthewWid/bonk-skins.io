@@ -130,7 +130,6 @@ button#loadmore, a.button#loadmore {
   margin-top: 20px; }
   .container .card {
     display: inline-block;
-    cursor: pointer;
     background-color: white;
     border: 2px solid #FFF;
     box-shadow: 0 0 5px #acacac, 0 5px 5px #acacac;
@@ -139,10 +138,12 @@ button#loadmore, a.button#loadmore {
     margin: 10px;
     text-decoration: none;
     color: initial; }
-    .container .card .under {
+    .container .card .card-image {
+      cursor: pointer; }
+    .container .card .card-details {
       padding: 0 5px;
       font-size: 14px; }
-      .container .card .under .author {
+      .container .card .card-details .author {
         color: #a0a0a0; }
     .container .card img {
       display: block;
@@ -156,6 +157,6 @@ button#loadmore, a.button#loadmore {
 
 .under-content {
   text-align: center;
-  margin: 10px 0; }
+  margin: 10px 0 20px 0; }
 
 /*# sourceMappingURL=index.css.map */

@@ -38,8 +38,10 @@
 				include "./backend/getlistings.php";
 			?>
 		</div>
-		<div class="under-content disabled">
+		<div class="under-content">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
+
+		<script src="./scripts/loadmore.js"></script>
 	</body>
 </html>

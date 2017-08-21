@@ -38,7 +38,7 @@
 		<div id="shape-container" class="modal disabled">
 			<div class="bg"></div>
 			<div id="shape-picker" class="container">
-				<div class="header">
+				<div class="section-header">
 					<span class="title">Shape Picker</span>
 					<span class="close">x</span>
 				</div>
@@ -48,7 +48,7 @@
 		<div id="colour-container" class="modal disabled">
 			<div class="bg"></div>
 			<div id="colour-picker" class="container">
-				<div class="header">
+				<div class="section-header">
 					<span class="title">Colour Picker</span>
 					<span class="close">x</span>
 				</div>
