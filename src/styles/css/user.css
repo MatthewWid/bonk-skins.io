@@ -101,7 +101,7 @@ button, a.button {
           color: #ff6868;
           font-weight: bold; }
     .modal .modal-container .modal-content {
-      padding: 10px;
+      padding: 5px 10px;
       max-height: 99vh;
       overflow-y: auto; }
 

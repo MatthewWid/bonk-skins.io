@@ -40,19 +40,54 @@
 		<div class="under-content">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
+
 		<div class="modal">
 			<div class="modal-bg"></div>
 			<div class="modal-container">
 				<div class="modal-header">
-					<span class="modal-title">Test Modal</span>
+					<span class="modal-title">Sign Up</span>
 					<span class="modal-close">x</span>
 				</div>
 				<div class="modal-content">
-					<div>Hello</div>
-					<div>There</div>
+					<div class="user-form">
+						<div class="user-section">
+							<div class="user-text">Username</div>
+							<input class="user-input" type="text" autocomplete="username" />
+						</div>
+						<div class="user-section">
+							<div class="user-text">Password</div>
+							<input class="user-input" type="password" autocomplete="new-password" />
+						</div>
+						<div class="user-section">
+							<div class="user-text">Email</div>
+							<input class="user-input" type="email" autocomplete="email" />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="modal disabled">
+			<div class="modal-bg"></div>
+			<div class="modal-container">
+				<div class="modal-header">
+					<span class="modal-title">Log In</span>
+					<span class="modal-close">x</span>
+				</div>
+				<div class="modal-content">
+					<div class="user-form">
+						<div class="user-section">
+							<div class="user-text">Username</div>
+							<input class="user-input" type="text" autocomplete="username" />
+						</div>
+						<div class="user-section">
+							<div class="user-text">Password</div>
+							<input class="user-input" type="password" autocomplete="current-password" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<script src="./scripts/search.js" defer></script>
 		<script src="./scripts/loadmore.js" defer></script>
 		<script src="./scripts/modal.js" defer></script>

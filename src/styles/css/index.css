@@ -101,7 +101,7 @@ button, a.button {
           color: #ff6868;
           font-weight: bold; }
     .modal .modal-container .modal-content {
-      padding: 10px;
+      padding: 5px 10px;
       max-height: 99vh;
       overflow-y: auto; }
 
@@ -202,5 +202,23 @@ button#loadmore, a.button#loadmore {
 .under-content {
   text-align: center;
   margin: 10px 0 20px 0; }
+
+.user-form {
+  width: 40vw; }
+  .user-form .user-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px; }
+    .user-form .user-section .user-text {
+      float: left; }
+    .user-form .user-section .user-input {
+      float: right;
+      font-size: 18px;
+      outline: none;
+      width: 50%;
+      border: 1px solid #bdbdbd;
+      transition: border .1s ease; }
+      .user-form .user-section .user-input:focus {
+        border: 1px solid #4a4a4a; }
 
 /*# sourceMappingURL=index.css.map */

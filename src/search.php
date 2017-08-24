@@ -21,9 +21,9 @@
 		<link rel="icon" type="image/png" href="./assets/favicon/favicon-16x16.png" sizes="16x16">
 		<link rel="manifest" href="./assets/favicon/manifest.json">
 		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
-
+	
+		<!-- Custom CSS -->
 		<link rel="stylesheet" type="text/css" href="./styles/css/index.css" />
-		<script src="./scripts/search.js" defer></script>
 	</head>
 	<body>
 		<div id="header">
@@ -36,11 +36,12 @@
 				<a class="page disabled" href="javascript:void(0);"><i class="fa fa-fire"></i> Hot</a>
 			</div>
 			<?php
+				$autofocus = true;
 				include "./assets/imports/search.php";
 			?>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
-		<div class="container">
+		<div class="content">
 			<?php
 				include "./backend/getlistings.php";
 			?>
@@ -48,5 +49,9 @@
 		<div class="under-content disabled">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
+
+		<script src="./scripts/search.js" defer></script>
+		<script src="./scripts/loadmore.js" defer></script>
+		<script src="./scripts/modal.js" defer></script>
 	</body>
 </html>

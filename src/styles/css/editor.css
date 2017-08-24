@@ -101,7 +101,7 @@ button, a.button {
           color: #ff6868;
           font-weight: bold; }
     .modal .modal-container .modal-content {
-      padding: 10px;
+      padding: 5px 10px;
       max-height: 99vh;
       overflow-y: auto; }
 
@@ -149,24 +149,26 @@ button#downloadimage, a.button#downloadimage {
     color: #FFF;
     font-weight: bold; }
 
-.modal .modal-container .list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start; }
-  .modal .modal-container .list .shape-item {
-    margin: 5px;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center; }
-  .modal .modal-container .list .colour-item {
-    cursor: pointer;
-    margin: 4px;
-    width: 30px;
-    height: 30px; }
+.modal .modal-container .modal-content {
+  padding: 0; }
+  .modal .modal-container .modal-content .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start; }
+    .modal .modal-container .modal-content .list .shape-item {
+      margin: 5px;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center; }
+    .modal .modal-container .modal-content .list .colour-item {
+      cursor: pointer;
+      margin: 4px;
+      width: 30px;
+      height: 30px; }
 
 #container {
   max-width: 70%;

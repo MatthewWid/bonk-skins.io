@@ -140,3 +140,29 @@ button, a.button {
 	text-align: center;
 	margin: 10px 0 20px 0;
 }
+
+.user-form {
+	width: 40vw;
+
+	.user-section {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 5px;
+
+		.user-text {
+			float: left;
+		}
+		.user-input {
+			float: right;
+			font-size: 18px;
+			outline: none;
+			width: 50%;
+			border: 1px solid #bdbdbd;
+			transition: border .1s ease;
+
+			&:focus {
+				border: 1px solid #4a4a4a;
+			}
+		}
+	}
+}

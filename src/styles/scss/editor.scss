@@ -77,39 +77,43 @@ button, a.button {
 
 $colour-item-size: 30px;
 .modal {
-	.modal-container .list {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-content: flex-start;
-		//max-height: 80vh;
-		//overflow-y: scroll;
+	.modal-container .modal-content {
+		padding: 0;
 
-		.shape-item {
-			margin: 5px;
-			cursor: pointer;
-			
-			width: 50px;
-			height: 50px;
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-		}
-		&.colours {
-			//flex-direction: column;
-			//max-height: ($colour-item-size + 4px) * 9;
-		}
-		.colour-item {
-			cursor: pointer;
-			margin: 4px;
-			width: $colour-item-size;
-			height: $colour-item-size;
-			//transition: box-shadow .1s ease;
-			//
-			//&:hover {
-			//	box-shadow: 0 0 0 2px #000;
-			//	border-radius: 2px;
-			//}
+		.list {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-content: flex-start;
+			//max-height: 80vh;
+			//overflow-y: scroll;
+
+			.shape-item {
+				margin: 5px;
+				cursor: pointer;
+				
+				width: 50px;
+				height: 50px;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			&.colours {
+				//flex-direction: column;
+				//max-height: ($colour-item-size + 4px) * 9;
+			}
+			.colour-item {
+				cursor: pointer;
+				margin: 4px;
+				width: $colour-item-size;
+				height: $colour-item-size;
+				//transition: box-shadow .1s ease;
+				//
+				//&:hover {
+				//	box-shadow: 0 0 0 2px #000;
+				//	border-radius: 2px;
+				//}
+			}
 		}
 	}
 }
