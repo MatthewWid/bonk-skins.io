@@ -61,6 +61,50 @@ button, a.button {
     button.raised:hover, a.button.raised:hover {
       box-shadow: 0 0 5px 1px #525252, 0 3px 3px #525252; }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .modal .modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); }
+  .modal .modal-container {
+    position: relative;
+    top: -10%;
+    box-shadow: 0 0 4px 2px #5e5e5e;
+    max-width: 90vw;
+    min-width: 20vw;
+    background: #cfd8dc; }
+    .modal .modal-container .modal-header {
+      line-height: 1em;
+      background: #009688;
+      color: #FFF;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between; }
+      .modal .modal-container .modal-header .modal-close {
+        font-size: 1.4em;
+        cursor: pointer;
+        transition: color .1s ease;
+        transform: translateY(-2px); }
+        .modal .modal-container .modal-header .modal-close:hover {
+          color: #ff6868;
+          font-weight: bold; }
+    .modal .modal-container .modal-content {
+      padding: 10px;
+      max-height: 99vh;
+      overflow-y: auto; }
+
 button#makeaskin, a.button#makeaskin {
   background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), transparent), #946554;
   line-height: 200%;
@@ -121,14 +165,14 @@ button#loadmore, a.button#loadmore {
       font-size: 12px;
       top: 1px; }
 
-.container {
+.content {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   max-width: 90%;
   margin: 0 auto;
   margin-top: 20px; }
-  .container .card {
+  .content .card {
     display: inline-block;
     background-color: white;
     border: 2px solid #FFF;
@@ -138,19 +182,19 @@ button#loadmore, a.button#loadmore {
     margin: 10px;
     text-decoration: none;
     color: initial; }
-    .container .card .card-image {
+    .content .card .card-image {
       cursor: pointer; }
-    .container .card .card-details {
+    .content .card .card-details {
       padding: 0 5px;
       font-size: 14px; }
-      .container .card .card-details .author {
+      .content .card .card-details .author {
         color: #a0a0a0; }
-    .container .card img {
+    .content .card img {
       display: block;
       margin-bottom: 5px; }
-    .container .card div {
+    .content .card div {
       line-height: initial; }
-    .container .card:hover {
+    .content .card:hover {
       transform: translateY(-3px);
       perspective: 1px;
       box-shadow: 0 0 7px 1px #acacac, 0 5px 10px #acacac; }

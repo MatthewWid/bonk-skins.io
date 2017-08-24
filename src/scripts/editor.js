@@ -3,7 +3,6 @@
 	Intended as an improved version of the current skin editor available in bonk.io
 	I do not own, nor am I in any way affiliated with the website, game or creator of bonk.io
 */
-console.clear();
 
 var url = new URL(location.href);
 var editDisabled = false;
@@ -49,7 +48,7 @@ if (!editDisabled) {
 				selectedLayer.properties.shape = this.dataset.num;
 				drawCanvas(selectedLayer.c.id, selectedLayer);
 				propertiesEl.shape.value.style.backgroundImage = "url(" + getImgUrl(this.dataset.num) + ")";
-				this.parentElement.parentElement.parentElement.classList.add("disabled");
+				closeAllModals();
 			}
 		});
 		shape.shapeListEl.appendChild(shapeItem);
@@ -87,7 +86,7 @@ for (var i = 0; i < colours.length; i++) {
 	colour.style.backgroundColor = colour.dataset.colour = colour.title = colours[i];
 	colour.addEventListener("click", function() {
 		changeColour(this.dataset.colour);
-		this.parentElement.parentElement.parentElement.classList.add("disabled");
+		closeAllModals();
 	});
 	colourList.appendChild(colour);
 }
@@ -1008,34 +1007,34 @@ function keyMoveProperty(e) {
 	if (editing_property > 0) {
 		switch (editing_property) {
 			case 1:
-				if (e.keyCode == 39) {
+				if (e.keyCode == 39) { // Right arrow
 					e.preventDefault();
 					selectedLayer.properties.x++;
-				} else if (e.keyCode == 37) {
+				} else if (e.keyCode == 37) { // Left arrow
 					e.preventDefault();
 					selectedLayer.properties.x--;
-				} else if (e.keyCode == 40) {
+				} else if (e.keyCode == 40) { // Down arrow
 					e.preventDefault();
 					selectedLayer.properties.y++;
-				} else if (e.keyCode == 38) {
+				} else if (e.keyCode == 38) { // Up arrow
 					e.preventDefault();
 					selectedLayer.properties.y--;
 				}
 				break;
 			case 2:
-				if (e.keyCode == 38) {
+				if (e.keyCode == 38) { // Up arrow
 					e.preventDefault();
 					selectedLayer.properties.angle++;
-				} else if (e.keyCode == 40) {
+				} else if (e.keyCode == 40) { // Down arrow
 					e.preventDefault();
 					selectedLayer.properties.angle--;
 				}
 				break;
 			case 3:
-				if (e.keyCode == 38) {
+				if (e.keyCode == 38) { // Up arrow
 					e.preventDefault();
 					selectedLayer.properties.scale += 0.01;
-				} else if (e.keyCode == 40) {
+				} else if (e.keyCode == 40) { // Down arrow
 					e.preventDefault();
 					selectedLayer.properties.scale -= 0.01;
 				}
@@ -1044,55 +1043,36 @@ function keyMoveProperty(e) {
 		}
 		createOffsets(selectedLayer.properties);
 		updateProperties();
-		drawCanvas(selectedLayer.c.id, selectedLayer);
+		if (selectedLayer.properties.shape > 0) {
+			drawCanvas(selectedLayer.c.id, selectedLayer);
+		}
 	}
 }
 
 /* Quality of life shortcuts/hotkeys */
 
 if (!editDisabled) {
-// Click X or background of modal to close it
-	document.querySelectorAll(".modal .close").forEach(function(e) {
-		e.addEventListener("click", function() {
-			e.parentElement.parentElement.parentElement.classList.toggle("disabled");
-			bgLayer.picking = false;
-		});
-	});
-	document.querySelectorAll(".modal .bg").forEach(function(e) {
-		e.addEventListener("click", function() {
-			e.parentElement.classList.add("disabled");
-			bgLayer.picking = false;
-		});
-	});
-	window.addEventListener("keydown", function(e) {
-		if (highlighting.inUse && e.keyCode == 32) {
+	document.addEventListener("keydown", function(e) {
+		if (highlighting.inUse && e.keyCode == 32) { // Space
 			e.preventDefault();
 			progressStep();
-		} else if (e.keyCode == 27) {
-			if (highlighting.inUse) {
-				e.preventDefault();
-				stepsInc = steps.length;
-				progressStep();
-			}
-			if (!document.getElementById("shape-container").classList.contains("disabled")) {
-				document.getElementById("shape-container").classList.add("disabled");
-			}
-			if (!document.getElementById("colour-container").classList.contains("disabled")) {
-				document.getElementById("colour-container").classList.add("disabled");
-			}
+		} else if (highlighting.inUse && e.keyCode == 27) { // Esc
+			e.preventDefault();
+			stepsInc = steps.length;
+			progressStep();
 		} else if (selectedLayer) {
 			switch (e.keyCode) {
-				case 49:
+				case 49: // 1
 					e.preventDefault();
 					document.getElementById("property-selectable-xy").click();
 					return;
 					break;
-				case 50:
+				case 50: // 2
 					e.preventDefault();
 					document.getElementById("property-container-angle").click();
 					return;
 					break;
-				case 51:
+				case 51: // 3
 					e.preventDefault();
 					document.getElementById("property-container-scale").click();
 					return;

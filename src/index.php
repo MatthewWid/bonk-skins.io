@@ -16,7 +16,6 @@
 		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
 
 		<link rel="stylesheet" type="text/css" href="./styles/css/index.css" />
-		<script src="./scripts/search.js" defer></script>
 	</head>
 	<body>
 		<div id="header">
@@ -33,7 +32,7 @@
 			?>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
-		<div class="container">
+		<div class="content">
 			<?php
 				include "./backend/getlistings.php";
 			?>
@@ -41,7 +40,21 @@
 		<div class="under-content">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
-
-		<script src="./scripts/loadmore.js"></script>
+		<div class="modal">
+			<div class="modal-bg"></div>
+			<div class="modal-container">
+				<div class="modal-header">
+					<span class="modal-title">Test Modal</span>
+					<span class="modal-close">x</span>
+				</div>
+				<div class="modal-content">
+					<div>Hello</div>
+					<div>There</div>
+				</div>
+			</div>
+		</div>
+		<script src="./scripts/search.js" defer></script>
+		<script src="./scripts/loadmore.js" defer></script>
+		<script src="./scripts/modal.js" defer></script>
 	</body>
 </html>

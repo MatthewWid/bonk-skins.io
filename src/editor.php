@@ -16,8 +16,9 @@
 		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
 		<meta name="theme-color" content="#ffffff">
 
-		<!-- Page specific CSS -->
 		<link rel="stylesheet" type="text/css" href="./styles/css/editor.css" />
+		<script src="./scripts/modal.js" defer></script>
+		<script src="./scripts/editor.js" defer></script>
 	</head>
 	<body>
 		<div id="header">
@@ -36,23 +37,27 @@
 			</div>
 		</div>
 		<div id="shape-container" class="modal disabled">
-			<div class="bg"></div>
-			<div id="shape-picker" class="container">
-				<div class="section-header">
-					<span class="title">Shape Picker</span>
-					<span class="close">x</span>
+			<div class="modal-bg"></div>
+			<div id="shape-picker" class="modal-container">
+				<div class="modal-header">
+					<span class="modal-title">Shape Picker</span>
+					<span class="modal-close">x</span>
 				</div>
-				<div class="list"></div>
+				<div class="modal-content">
+					<div class="list"></div>
+				</div>
 			</div>
 		</div>
 		<div id="colour-container" class="modal disabled">
-			<div class="bg"></div>
-			<div id="colour-picker" class="container">
-				<div class="section-header">
-					<span class="title">Colour Picker</span>
-					<span class="close">x</span>
+			<div class="modal-bg"></div>
+			<div id="colour-picker" class="modal-container">
+				<div class="modal-header">
+					<span class="modal-title">Colour Picker</span>
+					<span class="modal-close">x</span>
 				</div>
-				<div class="list colours"></div>
+				<div class="modal-content">
+					<div class="list colours"></div>
+				</div>
 			</div>
 		</div>
 		<div id="container">
@@ -119,8 +124,5 @@
 			<div id="highlight-text" class="no-select"></div>
 		</div>
 		<canvas id="overallImg"></canvas>
-		
-		<!-- Editor JavaScript -->
-		<script src="scripts/editor.js"></script>
 	</body>
 </html>
