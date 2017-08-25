@@ -18,6 +18,9 @@
 		<link rel="stylesheet" type="text/css" href="./styles/css/index.css" />
 	</head>
 	<body>
+		<noscript>
+			<h1>This website requires Javascript to be functional. Sorry :(</h1>
+		</noscript>
 		<div id="header">
 			<?php
 				include "./assets/imports/logo.php";
@@ -41,7 +44,7 @@
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
 
-		<div class="modal">
+		<div id="signup-modal" class="modal">
 			<div class="modal-bg"></div>
 			<div class="modal-container">
 				<div class="modal-header">
@@ -49,24 +52,28 @@
 					<span class="modal-close">x</span>
 				</div>
 				<div class="modal-content">
-					<div class="user-form">
-						<div class="user-section">
-							<div class="user-text">Username</div>
-							<input class="user-input" type="text" autocomplete="username" />
-						</div>
-						<div class="user-section">
-							<div class="user-text">Password</div>
-							<input class="user-input" type="password" autocomplete="new-password" />
-						</div>
-						<div class="user-section">
-							<div class="user-text">Email</div>
-							<input class="user-input" type="email" autocomplete="email" />
-						</div>
-					</div>
+					<form id="signup-form" class="user-form" autocomplete="off">
+							<div class="user-section">
+								<label class="user-text" for="username">Username</label>
+								<input class="user-input" type="text" name="username" placeholder="Required" autocomplete="username" minlength="3" maxlength="16" required />
+							</div>
+							<div class="user-section">
+								<label class="user-text" for="password">Password</label>
+								<input class="user-input" type="password" name="password" placeholder="Required" autocomplete="new-password" minlength="8" maxlength="24" required />
+							</div>
+							<div class="user-section">
+								<label class="user-text" for="email">Email</label>
+								<input class="user-input" type="email" name="email" placeholder="Optional" autocomplete="email" />
+							</div>
+							<div class="user-section">
+								<p id="signup-output" class="user-error hidden">Error</p>
+							</div>
+							<input class="user-submit" type="submit" />
+					</form>
 				</div>
 			</div>
 		</div>
-		<div class="modal disabled">
+		<div id="login-modal" class="modal disabled">
 			<div class="modal-bg"></div>
 			<div class="modal-container">
 				<div class="modal-header">
@@ -74,22 +81,27 @@
 					<span class="modal-close">x</span>
 				</div>
 				<div class="modal-content">
-					<div class="user-form">
-						<div class="user-section">
-							<div class="user-text">Username</div>
-							<input class="user-input" type="text" autocomplete="username" />
-						</div>
-						<div class="user-section">
-							<div class="user-text">Password</div>
-							<input class="user-input" type="password" autocomplete="current-password" />
-						</div>
-					</div>
+					<form id="login-form" class="user-form">
+							<div class="user-section">
+								<label class="user-text" for="username">Username</label>
+								<input class="user-input" type="text" name="username" placeholder="Required" autocomplete="username" minlength="3" maxlength="16" required />
+							</div>
+							<div class="user-section">
+								<label class="user-text" for="password">Password</label>
+								<input class="user-input" type="password" name="password" placeholder="Required" autocomplete="new-password" minlength="8" maxlength="24" required />
+							</div>
+							<div class="user-section">
+								<p id="signup-output" class="user-error hidden">Error</p>
+							</div>
+							<input class="user-submit" type="submit" />
+					</form>
 				</div>
 			</div>
 		</div>
 
-		<script src="./scripts/search.js" defer></script>
-		<script src="./scripts/loadmore.js" defer></script>
-		<script src="./scripts/modal.js" defer></script>
+		<script src="./scripts/search.js"></script>
+		<script src="./scripts/loadmore.js"></script>
+		<script src="./scripts/modal.js"></script>
+		<script src="./scripts/user_form.js"></script>
 	</body>
 </html>

@@ -13,6 +13,9 @@ body {
 .disabled {
   display: none !important; }
 
+.hidden {
+  visibility: hidden !important; }
+
 .no-select {
   user-select: none !important; }
 

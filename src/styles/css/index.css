@@ -13,6 +13,9 @@ body {
 .disabled {
   display: none !important; }
 
+.hidden {
+  visibility: hidden !important; }
+
 .no-select {
   user-select: none !important; }
 
@@ -220,5 +223,25 @@ button#loadmore, a.button#loadmore {
       transition: border .1s ease; }
       .user-form .user-section .user-input:focus {
         border: 1px solid #4a4a4a; }
+    .user-form .user-section .user-error {
+      color: #F00;
+      font-size: 16px;
+      text-align: center;
+      width: 100%; }
+  .user-form .user-submit {
+    background-color: #009688;
+    color: #FFF;
+    width: 100%;
+    border: none;
+    padding: 1px;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: transform .1s ease; }
+    .user-form .user-submit:hover {
+      transform: translateY(-1px); }
+    .user-form .user-submit:active {
+      transform: translateY(0); }
 
 /*# sourceMappingURL=index.css.map */

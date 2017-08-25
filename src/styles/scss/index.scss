@@ -164,5 +164,34 @@ button, a.button {
 				border: 1px solid #4a4a4a;
 			}
 		}
+		.user-error {
+			color: #F00;
+			font-size: 16px;
+			text-align: center;
+			width: 100%;
+		}
+	}
+	.user-submit {
+		background-color: $header-background;
+		//background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+		color: #FFF;
+		width: 100%;
+		border: none;
+		padding: 1px;
+		font-size: 18px;
+		border-radius: 5px;
+		outline: none;
+		cursor: pointer;
+		transition: transform .1s ease;
+
+		&:hover {
+			//background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+			transform: translateY(-1px);
+		}
+		&:active {
+			//width: 99%;
+			//margin-left: .5%;
+			transform: translateY(0);
+		}
 	}
 }
