@@ -88,7 +88,7 @@ button, a.button {
 	}
 }
 
-.content {
+#content {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -96,42 +96,47 @@ button, a.button {
 	margin: 0 auto;
 	margin-top: 20px;
 	
-	$card-dim: 100px;
-	$card-border: 2px;
-	.card {
-		display: inline-block;
-		//max-width: 100px + 4px;
-		background-color: rgb(255, 255, 255);
-		border: $card-border solid #FFF;
-		box-shadow: 0 0 5px $shadow-colour, 0 5px 5px $shadow-colour;
-		border-radius: 2px;
-		transition: transform .2s ease, box-shadow .2s ease;
-		margin: 10px;
-		text-decoration: none;
-		color: initial;
-		
-		.card-image {
-			cursor: pointer;
-		}
-		.card-details {
-			padding: 0 5px;
-			font-size: 14px;
+	.page {
+		text-align: center;
 
-			.author {
-				color: #a0a0a0;
+		$card-dim: 100px;
+		$card-border: 2px;
+		.card {
+			text-align: initial;
+			display: inline-block;
+			//max-width: 100px + 4px;
+			background-color: rgb(255, 255, 255);
+			border: $card-border solid #FFF;
+			box-shadow: 0 0 5px $shadow-colour, 0 5px 5px $shadow-colour;
+			border-radius: 2px;
+			transition: transform .2s ease, box-shadow .2s ease;
+			margin: 10px;
+			text-decoration: none;
+			color: initial;
+			
+			.card-image {
+				cursor: pointer;
 			}
-		}
-		img {
-			display: block;
-			margin-bottom: 5px;
-		}
-		div {
-			line-height: initial;
-		}
-		&:hover {
-			transform: translateY(-3px);
-			perspective: 1px;
-			box-shadow: 0 0 7px 1px $shadow-colour, 0 5px 10px $shadow-colour;
+			.card-details {
+				padding: 0 5px;
+				font-size: 14px;
+
+				.author {
+					color: #a0a0a0;
+				}
+			}
+			img {
+				display: block;
+				margin-bottom: 5px;
+			}
+			div {
+				line-height: initial;
+			}
+			&:hover {
+				transform: translateY(-3px);
+				perspective: 1px;
+				box-shadow: 0 0 7px 1px $shadow-colour, 0 5px 10px $shadow-colour;
+			}
 		}
 	}
 }

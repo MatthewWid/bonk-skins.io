@@ -35,16 +35,18 @@
 			?>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
-		<div class="content">
-			<?php
-				include "./backend/getlistings.php";
-			?>
+		<div id="content">
+			<div class="page" id="page-0">
+				<?php
+					include "./backend/getlistings.php";
+				?>
+			</div>
 		</div>
 		<div class="under-content">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
 
-		<div id="signup-modal" class="modal">
+		<div id="signup-modal" class="modal disabled">
 			<div class="modal-bg"></div>
 			<div class="modal-container">
 				<div class="modal-header">

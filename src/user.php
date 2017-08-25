@@ -18,6 +18,9 @@
 		<link rel="stylesheet" type="text/css" href="./styles/css/user.css" />
 	</head>
 	<body>
+		<noscript>
+			<h1>This website requires Javascript to be functional. Sorry :(</h1>
+		</noscript>
 		<div id="header">
 			<?php
 				include "./assets/imports/logo.php";

@@ -19,6 +19,9 @@
 		<link rel="stylesheet" type="text/css" href="./styles/css/index.css" />
 	</head>
 	<body>
+		<noscript>
+			<h1>This website requires Javascript to be functional. Sorry :(</h1>
+		</noscript>
 		<div class="header">
 			<?php
 				include "./assets/imports/logo.php";

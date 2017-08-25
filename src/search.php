@@ -26,6 +26,9 @@
 		<link rel="stylesheet" type="text/css" href="./styles/css/index.css" />
 	</head>
 	<body>
+		<noscript>
+			<h1>This website requires Javascript to be functional. Sorry :(</h1>
+		</noscript>
 		<div id="header">
 			<?php
 				include "./assets/imports/logo.php";
@@ -41,12 +44,14 @@
 			?>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
-		<div class="content">
-			<?php
-				include "./backend/getlistings.php";
-			?>
+		<div id="content">
+			<div class="page" id="page-0">
+				<?php
+					include "./backend/getlistings.php";
+				?>
+			</div>
 		</div>
-		<div class="under-content disabled">
+		<div class="under-content">
 			<button id="loadmore" class="flat">LOAD MORE</button>
 		</div>
 

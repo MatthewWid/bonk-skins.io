@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2017 at 11:57 PM
+-- Generation Time: Aug 25, 2017 at 02:12 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -30,9 +30,25 @@ CREATE TABLE `skins` (
   `skin_id` int(11) NOT NULL,
   `skin_name` varchar(17) NOT NULL,
   `skin_author` varchar(17) NOT NULL,
+  `creator_id` int(11) NOT NULL,
   `skin_data` text NOT NULL,
   `skin_img` text NOT NULL,
   `skin_creation` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(17) NOT NULL,
+  `user_pword` text NOT NULL,
+  `user_mod` tinyint(1) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `user_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -46,6 +62,12 @@ ALTER TABLE `skins`
   ADD PRIMARY KEY (`skin_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -53,7 +75,12 @@ ALTER TABLE `skins`
 -- AUTO_INCREMENT for table `skins`
 --
 ALTER TABLE `skins`
-  MODIFY `skin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `skin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
