@@ -468,7 +468,7 @@ function submitskin() {
 				imgHttpRequest.send(form);
 			}
 		}
-	}
+	};
 
 	var skin_name = document.getElementById("skin-title").value;
 	if (skin_name.length < 1) {
@@ -1112,7 +1112,7 @@ if (url.searchParams.get("id")) {
 				importskin(httpRequest.responseText);
 			}
 		}
-	}
+	};
 	httpRequest.open("GET", "./backend/getskin.php?id=" + url.searchParams.get("id"));
 	httpRequest.send();
 }

@@ -223,7 +223,8 @@ button#loadmore, a.button#loadmore {
       outline: none;
       width: 50%;
       border: 1px solid #bdbdbd;
-      transition: border .1s ease; }
+      transition: border .1s ease;
+      padding: 1px; }
       .user-form .user-section .user-input:focus {
         border: 1px solid #4a4a4a; }
     .user-form .user-section .user-error {
