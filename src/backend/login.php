@@ -3,6 +3,7 @@
 		include "../assets/imports/config.php";
 
 		$con = mysqli_connect($server_ip, $server_user, $server_password, $server_db);
+		// Do something to prevent SQL injection
 		$sql1 = mysqli_query($con, "SELECT * FROM users WHERE user_name = \"" . $_POST["username"] . "\" AND \"" . md5($_POST["password"]) . "\"");
 
 		if (mysqli_num_rows($sql1) == 1) { // A user has been found

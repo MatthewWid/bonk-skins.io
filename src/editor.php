@@ -17,8 +17,6 @@
 		<meta name="theme-color" content="#ffffff">
 
 		<link rel="stylesheet" type="text/css" href="./styles/css/editor.css" />
-		<script src="./scripts/modal.js" defer></script>
-		<script src="./scripts/editor.js" defer></script>
 	</head>
 	<body>
 		<noscript>
@@ -127,5 +125,12 @@
 			<div id="highlight-text" class="no-select"></div>
 		</div>
 		<canvas id="overallImg"></canvas>
+		<?php
+			include "./assets/imports/loginsignup/modals.php";
+		?>
+
+		<script src="./scripts/modal.js"></script>
+		<script src="./scripts/user.js"></script>
+		<script src="./scripts/editor.js"></script>
 	</body>
 </html>

@@ -108,6 +108,53 @@ button, a.button {
       max-height: 99vh;
       overflow-y: auto; }
 
+.button-inline {
+  text-decoration: underline;
+  cursor: pointer; }
+  .button-inline:hover {
+    font-weight: bold; }
+
+.user-form {
+  width: 40vw; }
+  .user-form .user-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px; }
+    .user-form .user-section .user-text {
+      float: left; }
+    .user-form .user-section .user-input {
+      float: right;
+      font-size: 18px;
+      outline: none;
+      width: 50%;
+      border: 1px solid #bdbdbd;
+      transition: border .1s ease;
+      padding: 1px; }
+      .user-form .user-section .user-input:focus {
+        border: 1px solid #4a4a4a; }
+    .user-form .user-section .user-error {
+      color: #F00;
+      font-size: 16px;
+      text-align: center;
+      width: 100%; }
+  .user-form .user-submit {
+    background-color: #009688;
+    color: #FFF;
+    width: 100%;
+    border: none;
+    padding: 1px;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: transform .1s ease;
+    box-shadow: 0 2px 1px 0px #999; }
+    .user-form .user-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 1px 1px #999; }
+    .user-form .user-submit:active {
+      transform: translateY(0); }
+
 button#makeaskin, a.button#makeaskin {
   background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), transparent), #946554;
   line-height: 200%;
@@ -208,44 +255,5 @@ button#loadmore, a.button#loadmore {
 .under-content {
   text-align: center;
   margin: 10px 0 20px 0; }
-
-.user-form {
-  width: 40vw; }
-  .user-form .user-section {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px; }
-    .user-form .user-section .user-text {
-      float: left; }
-    .user-form .user-section .user-input {
-      float: right;
-      font-size: 18px;
-      outline: none;
-      width: 50%;
-      border: 1px solid #bdbdbd;
-      transition: border .1s ease;
-      padding: 1px; }
-      .user-form .user-section .user-input:focus {
-        border: 1px solid #4a4a4a; }
-    .user-form .user-section .user-error {
-      color: #F00;
-      font-size: 16px;
-      text-align: center;
-      width: 100%; }
-  .user-form .user-submit {
-    background-color: #009688;
-    color: #FFF;
-    width: 100%;
-    border: none;
-    padding: 1px;
-    font-size: 18px;
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-    transition: transform .1s ease; }
-    .user-form .user-submit:hover {
-      transform: translateY(-1px); }
-    .user-form .user-submit:active {
-      transform: translateY(0); }
 
 /*# sourceMappingURL=index.css.map */
