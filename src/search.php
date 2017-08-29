@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	if (!ISSET($_GET["q"])) {
 		header("Location: ./");
 		die();
@@ -32,6 +33,7 @@
 		<div id="header">
 			<?php
 				include "./assets/imports/logo.php";
+				include "./assets/imports/loginsignup/headerinfo.php";
 			?>
 			<div class="sort-list">
 				<a class="page" href="javascript:void(0);"><i class="fa fa-tag"></i> New</a>

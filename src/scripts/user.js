@@ -1,16 +1,33 @@
 var signupBut = document.getElementById("signup-button");
 var loginBut = document.getElementById("login-button");
+var logoutBut = document.getElementById("logout-button");
 
 if (signupBut) {
-	signupBut.addEventListener("click", function(e) {
+	signupBut.addEventListener("click", function() {
 		document.getElementById("signup-modal").classList.remove("disabled");
 		document.querySelector("#signup-form .user-input[name=\"username\"").focus();
 	});
 }
 if (loginBut) {
-	loginBut.addEventListener("click", function(e) {
+	loginBut.addEventListener("click", function() {
 		document.getElementById("login-modal").classList.remove("disabled");
 		document.querySelector("#login-form .user-input[name=\"username\"").focus();
+	});
+}
+if (logoutBut) {
+	logoutBut.addEventListener("click", function() {
+		var httpRequest = new XMLHttpRequest();
+		httpRequest.onreadystatechange = function() {
+			if (httpRequest.readyState === XMLHttpRequest.DONE) {
+				if (httpRequest.status === 200) {
+					console.log(httpRequest.responseText);
+					location.reload();
+				}
+			}
+		};
+
+		httpRequest.open("GET", "./backend/logout.php", true);
+		httpRequest.send();
 	});
 }
 
@@ -38,6 +55,8 @@ document.getElementById("signup-form").addEventListener("submit", function(evt) 
 
 				if (res.type == 0 || res.type == 1) { // Username is taken or invalid.
 					_this.querySelector(".user-input[name=\"username\"]").select();
+				} else if (res.type == 2) { // Email is invalid.
+					_this.querySelector(".user-input[name=\"email\"]").select();
 				}
 			}
 		}
@@ -58,13 +77,15 @@ document.getElementById("login-form").addEventListener("submit", function(evt) {
 			if (httpRequest.status === 200) {
 				var res = JSON.parse(httpRequest.responseText);
 				console.log(httpRequest.responseText);
-				document.getElementById("login-output").classList.remove("hidden");
-				document.getElementById("login-output").innerHTML = res.text;
 
-				if (res.type == 0) { // Username/Password is incorrect
+				if (res && res.type == 0) { // Username/Password is incorrect
 					var passText = _this.querySelector(".user-input[name=\"password\"]");
 					passText.value = "";
-					passText.focus;
+					passText.focus();
+					document.getElementById("login-output").classList.remove("hidden");
+					document.getElementById("login-output").innerHTML = res.text;
+				} else if (res.type == 1) { // Successful login
+					location.reload();
 				}
 			}
 		}

@@ -38,11 +38,11 @@
 			<form id="login-form" class="user-form" autocomplete="off">
 					<div class="user-section">
 						<label class="user-text" for="username">Username</label>
-						<input class="user-input" type="text" name="username" placeholder="Required" autocomplete="username" required />
+						<input class="user-input" type="text" name="username" placeholder="Required" autocomplete="username" minlength="3" maxlength="16" required />
 					</div>
 					<div class="user-section">
 						<label class="user-text" for="password">Password</label>
-						<input class="user-input" type="password" name="password" placeholder="Required" autocomplete="new-password" required />
+						<input class="user-input" type="password" name="password" placeholder="Required" autocomplete="new-password" minlength="8" maxlength="24" required />
 					</div>
 					<div class="user-section">
 						<p id="login-output" class="user-error hidden">SERVER RESPONSE</p>

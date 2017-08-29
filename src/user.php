@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,6 +25,7 @@
 		<div id="header">
 			<?php
 				include "./assets/imports/logo.php";
+				include "./assets/imports/loginsignup/headerinfo.php";
 			?>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
