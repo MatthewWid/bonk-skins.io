@@ -1,9 +1,11 @@
 .button-inline {
 	text-decoration: underline;
 	cursor: pointer;
+	transition: color .1s ease;
 
 	&:hover {
-		font-weight: bold;
+		//font-weight: bold;
+		color: #c5c5c5;
 	}
 }
 .user-form {

@@ -2,6 +2,7 @@ var page = 0;
 var loadButton = document.getElementById("loadmore");
 var url = new URL(location.href);
 var searchQ = url.searchParams.get("q");
+var userName = url.searchParams.get("u");
 
 loadButton.addEventListener("click", function() {
 	page++;
@@ -19,6 +20,6 @@ loadButton.addEventListener("click", function() {
 			}
 		}
 	}
-	httpRequest.open("GET", "./backend/getlistings.php?page=" + page + (searchQ ? "&q=" + searchQ : ""));
+	httpRequest.open("GET", "./backend/getlistings.php?page=" + page + (searchQ ? "&q=" + searchQ : "") + (userName ? "&u=" + userName : ""));
 	httpRequest.send();
 });

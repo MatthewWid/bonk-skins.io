@@ -1,21 +1,21 @@
 /*
 Error: Undefined variable: "$header-background".
-        on line 41 of scss/loginsignup.scss
+        on line 43 of scss/loginsignup.scss
 
-36: 			text-align: center;
-37: 			width: 100%;
-38: 		}
-39: 	}
-40: 	.user-submit {
-41: 		background-color: $header-background;
-42: 		//background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
-43: 		color: #FFF;
-44: 		width: 100%;
-45: 		border: none;
-46: 		padding: 1px;
+38: 			text-align: center;
+39: 			width: 100%;
+40: 		}
+41: 	}
+42: 	.user-submit {
+43: 		background-color: $header-background;
+44: 		//background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+45: 		color: #FFF;
+46: 		width: 100%;
+47: 		border: none;
+48: 		padding: 1px;
 
 Backtrace:
-scss/loginsignup.scss:41
+scss/loginsignup.scss:43
 C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/script/tree/variable.rb:49:in `_perform'
 C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/script/tree/node.rb:58:in `perform'
 C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:397:in `visit_prop'
@@ -78,4 +78,4 @@ C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/vendor/listen/lib/listen/adap
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$header-background\".\A         on line 41 of scss/loginsignup.scss\A \A 36: 			text-align: center;\A 37: 			width: 100%;\A 38: 		}\A 39: 	}\A 40: 	.user-submit {\A 41: 		background-color: $header-background;\A 42: 		//background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));\A 43: 		color: #FFF;\A 44: 		width: 100%;\A 45: 		border: none;\A 46: 		padding: 1px;"; }
+  content: "Error: Undefined variable: \"$header-background\".\A         on line 43 of scss/loginsignup.scss\A \A 38: 			text-align: center;\A 39: 			width: 100%;\A 40: 		}\A 41: 	}\A 42: 	.user-submit {\A 43: 		background-color: $header-background;\A 44: 		//background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));\A 45: 		color: #FFF;\A 46: 		width: 100%;\A 47: 		border: none;\A 48: 		padding: 1px;"; }

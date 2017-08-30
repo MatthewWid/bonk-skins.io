@@ -7,4 +7,4 @@ RewriteRule	^delete$	delete.php	[NC,L] # Redirect /delete to delete.php
 
 RewriteRule	^search$	search.php	[NC,L] # Redirect /search to search.php
 
-RewriteRule	^u(ser)?/?$	user.php	[NC,L] # Redirect /u/ or /u/user to user.php
+RewriteRule	^profile$	profile.php	[NC,L] # Redirect /profile to profile.php

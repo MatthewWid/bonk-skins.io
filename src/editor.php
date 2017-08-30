@@ -26,8 +26,9 @@
 		<div id="header">
 			<?php
 				include "./assets/imports/logo.php";
+				include "./assets/imports/userinfo.php";
 			?>
-			<span class="user disabled" id="madeby">Made by <span class="name">MatthewMob</span></span>
+			<span class="user disabled" id="madeby">Made by <span class="name"></span>.</span>
 			<div>
 				<button id="submitskin" class="raised" title="Save your skin to the database">Submit Skin</button>
 				<div class="portbuttons">

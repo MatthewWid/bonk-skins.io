@@ -5,7 +5,7 @@
 		</div>";
 	} else {
 		echo "<div class=\"user-info\">
-			Logged in as " . $_SESSION["login_user"] . ". <span id=\"logout-button\" class=\"button-inline\">Logout</span>.
+			Logged in as <a class=\"name\" href=\"./profile?u=" . $_SESSION["login_user"] . "\">" . $_SESSION["login_user"] . "</a>. <span id=\"logout-button\" class=\"button-inline\">Logout</span>
 		</div>";
 	}
 ?>

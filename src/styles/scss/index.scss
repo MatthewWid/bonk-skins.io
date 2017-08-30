@@ -122,7 +122,7 @@ button, a.button {
 				font-size: 14px;
 
 				.author {
-					color: #a0a0a0;
+					transition: color .2s ease;
 				}
 			}
 			img {
@@ -136,6 +136,13 @@ button, a.button {
 				transform: translateY(-3px);
 				perspective: 1px;
 				box-shadow: 0 0 7px 1px $shadow-colour, 0 5px 10px $shadow-colour;
+
+				.author {
+					color: darken($link-colour, 20%);
+				}
+			}
+			&:not(:hover) .author {
+				color: #a0a0a0;
 			}
 		}
 	}

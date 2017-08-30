@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php
+	session_start();
+	if (!ISSET($_GET["u"])) {
+		header("Location: ./");
+		die();
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -16,6 +23,7 @@
 		<link rel="manifest" href="./assets/favicon/manifest.json">
 		<link rel="mask-icon" href="./assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
 
+		<link rel="stylesheet" type="text/css" href="./styles/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="./styles/css/user.css" />
 	</head>
 	<body>
@@ -26,9 +34,28 @@
 			<?php
 				include "./assets/imports/logo.php";
 				include "./assets/imports/loginsignup/headerinfo.php";
+				include "./assets/imports/userinfo.php";
+				include "./assets/imports/search.php";
 			?>
 			<a id="makeaskin" class="button raised" href="editor">Make a skin</a>
 		</div>
+		<div id="content">
+			<div class="page" id="page-0">
+				<?php
+					include "./backend/getlistings.php";
+				?>
+			</div>
+		</div>
+		<div class="under-content">
+			<button id="loadmore" class="flat">LOAD MORE</button>
+		</div>
+		<?php
+			include "./assets/imports/loginsignup/modals.php";
+		?>
+
+		<script src="./scripts/search.js"></script>
+		<script src="./scripts/loadmore.js"></script>
+		<script src="./scripts/modal.js"></script>
+		<script src="./scripts/user.js"></script>
 	</body>
 </html>
-<!-- <span class="user disabled">MatthewMob <span class="totalScore ">(0)</span></span> -->

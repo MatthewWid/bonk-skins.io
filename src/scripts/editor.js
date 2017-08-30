@@ -549,7 +549,7 @@ function importskin(data) {
 			}
 		}
 		document.getElementById("skin-title").value = pData.skinName;
-		document.querySelector("#madeby .name").textContent = pData.author;
+		document.querySelector("#madeby .name").innerHTML = "<a href=\"./profile?u=" + pData.author + "\">" + pData.author + "</a>";
 		document.getElementById("madeby").classList.remove("disabled");
 		document.getElementsByTagName("title")[0].innerHTML = pData.skinName + " - Bonk-Skins.io";
 		bgLayer.picking = true;

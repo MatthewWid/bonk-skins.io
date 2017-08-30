@@ -10,6 +10,10 @@ body {
   overflow-x: hidden;
   min-width: 330px; }
 
+a {
+  color: #b9dbff;
+  text-decoration: none; }
+
 .disabled {
   display: none !important; }
 
@@ -45,6 +49,9 @@ body {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       -webkit-text-stroke: .6px #000; }
+  #header .name {
+    font-weight: bold;
+    text-shadow: 0 1px 2px #000; }
 
 button, a.button {
   font-family: "Roboto", Arial, sans-serif;
@@ -110,9 +117,10 @@ button, a.button {
 
 .button-inline {
   text-decoration: underline;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: color .1s ease; }
   .button-inline:hover {
-    font-weight: bold; }
+    color: #c5c5c5; }
 
 .user-form {
   width: 40vw; }

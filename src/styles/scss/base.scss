@@ -11,9 +11,15 @@ body {
 	overflow-x: hidden;
 	min-width: 330px;
 }
+$link-colour: #b9dbff;
+a {
+	color: $link-colour;
+    text-decoration: none;
+}
 
 $shadow-colour: rgb(172, 172, 172);
 $gradient-overlay: linear-gradient(to bottom right, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0));
+$text-shadow: 0 1px 2px #000;
 
 .disabled {
 	display: none !important;
@@ -70,6 +76,10 @@ $header-background: #009688;
 			-webkit-text-fill-color: transparent;
 			-webkit-text-stroke: .6px #000;
 		}
+	}
+	.name {
+		font-weight: bold;
+		text-shadow: $text-shadow;
 	}
 }
 
