@@ -26,11 +26,15 @@
 		<div id="header">
 			<?php
 				include "./assets/imports/logo.php";
-				include "./assets/imports/userinfo.php";
+				include "./assets/imports/loginsignup/headerinfo.php";
 			?>
-			<span class="user disabled" id="madeby">Made by <span class="name"></span>.</span>
+			<span class="user hidden" id="madeby">Made by <span class="name"></span>.</span>
 			<div>
-				<button id="submitskin" class="raised" title="Save your skin to the database">Submit Skin</button>
+				<?php
+					if (ISSET($_SESSION["login_user"])) {
+						echo "<button id=\"submitskin\" class=\"raised\" title=\"Save your skin to the database\">Submit Skin</button>";
+					}
+				?>
 				<div class="portbuttons">
 					<button id="downloadskin" class="raised" title="Download your skin as a .bskin file"><i class="fa fa-download" aria-hidden="true"></i></button>
 					<button id="uploadskin" class="raised" title="Upload a .bskin file"><i class="fa fa-upload" aria-hidden="true"></i></button>

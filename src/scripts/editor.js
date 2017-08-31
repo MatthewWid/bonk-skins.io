@@ -407,7 +407,7 @@ function compileToImage() {
 	}
 
 	var data = cImg.toDataURL();
-	cImgCtx.clearRect(0, 0, cImg.width, cImg.height);
+	//cImgCtx.clearRect(0, 0, cImg.width, cImg.height);
 
 	return data;
 }
@@ -415,25 +415,6 @@ function compileToImage() {
 // [a-zA-Z0-9]*_?\s*
 function submitskin() {
 	console.clear();
-	var skin_author = "";
-	// What is Regex?
-	var allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-	var rejectName = true;
-	while (rejectName) {
-		skin_author = prompt("Authors name\nOnly alphanumeric and underscore. Maximum 16 characters.");
-		if (skin_author && skin_author.length >= 1 && skin_author.length <= 16) {
-			rejectName = false;
-			for (var i = 0; i < skin_author.length; i++) {
-				console.log(skin_author[i]);
-				console.log(allowedChars.indexOf(skin_author[i]));
-				if (allowedChars.indexOf(skin_author[i].toLowerCase()) == -1) {
-					rejectName = true;
-				}
-			}
-		} else if (!skin_author) {
-			return;
-		}
-	}
 	var tempLayers = layers;
 	for (var i = 0; i < tempLayers.length; i++) {
 		delete tempLayers[i].c;
@@ -445,12 +426,9 @@ function submitskin() {
 	httpRequest.onreadystatechange = function() {
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			if (httpRequest.status === 200) {
-				/*
-					TODO:
-					Redirect to readonly version of skin once skin is submitted.
-				*/
 				console.log("Received response successfully - submitskin()");
-				location.href = "editor?id=" + parseInt(httpRequest.responseText) + "&editable=false";
+				console.log(httpRequest.responseText);
+				//location.href = "editor?id=" + parseInt(httpRequest.responseText) + "&editable=false";
 
 				var imgHttpRequest = new XMLHttpRequest();
 				imgHttpRequest.onreadystatechange = function() {
@@ -477,22 +455,26 @@ function submitskin() {
 	var skin_data = JSON.stringify({
 		skinName: skin_name,
 		v: skinV,
-		author: skin_author,
+		author: "",
 		baseColour: bgLayer.colour,
 		layers: tempLayers
 	});
 
-	var sendString = "name=" + skin_name + "&author=" + skin_author + "&data=" + skin_data;
+	var sendString = "name=" + skin_name + "&data=" + skin_data;
 
 	httpRequest.open("GET", "./backend/saveskin.php?" + sendString);
 	httpRequest.send();
 }
 if (!editDisabled) {
-	document.getElementById("submitskin").addEventListener("click", function() {
-		if (checkValidName()) {
-			submitskin();
-		}
-	});
+	var submitSkinButton = document.getElementById("submitskin");
+	console.log(submitSkinButton);
+	if (submitSkinButton) {
+		submitSkinButton.addEventListener("click", function() {
+			if (checkValidName()) {
+				submitskin();
+			}
+		});
+	}
 }
 
 // Variable that sets the skin version - This is updated every time a major change to the format/structure of a layer is made.
@@ -500,6 +482,7 @@ if (!editDisabled) {
 var skinV = 9;
 // Convert layers to JSON data, include skin metadata, and download all almagamated data as a .bskin file
 function exportskin() {
+	console.log("Exporting");
 	var tempLayers = layers;
 	var name = document.getElementById("skin-title").value;
 	if (name.length < 1) {
@@ -509,10 +492,29 @@ function exportskin() {
 		delete tempLayers[i].c;
 		delete tempLayers[i].el;
 	}
+	var skin_author = "";
+	// What is Regex?
+	var allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+	var rejectName = true;
+	while (rejectName) {
+		skin_author = prompt("Authors name\nOnly alphanumeric and underscore. Maximum 16 characters.");
+		if (skin_author && skin_author.length >= 1 && skin_author.length <= 16) {
+			rejectName = false;
+			for (var i = 0; i < skin_author.length; i++) {
+				console.log(skin_author[i]);
+				console.log(allowedChars.indexOf(skin_author[i]));
+				if (allowedChars.indexOf(skin_author[i].toLowerCase()) == -1) {
+					rejectName = true;
+				}
+			}
+		} else if (!skin_author) {
+			return;
+		}
+	}
 	var exportData = {
 		skinName: name,
 		v: skinV,
-		author: "",
+		author: skin_author,
 		baseColour: bgLayer.colour,
 		layers: tempLayers
 	};
@@ -550,7 +552,7 @@ function importskin(data) {
 		}
 		document.getElementById("skin-title").value = pData.skinName;
 		document.querySelector("#madeby .name").innerHTML = "<a href=\"./profile?u=" + pData.author + "\">" + pData.author + "</a>";
-		document.getElementById("madeby").classList.remove("disabled");
+		document.getElementById("madeby").classList.remove("hidden");
 		document.getElementsByTagName("title")[0].innerHTML = pData.skinName + " - Bonk-Skins.io";
 		bgLayer.picking = true;
 		changeColour(pData.baseColour);
@@ -620,7 +622,10 @@ if (!editDisabled) {
 	propertiesEl.name.container.addEventListener("click", function() {
 		if (selectedLayer) {
 			var newName = prompt("Rename Layer (Max. 9 Characters)");
-			if (newName.trim().length <= 0) {
+			if (!newName) {
+				return false;
+			}
+			if (newName.length <= 0) {
 				return false;
 			}
 			selectedLayer.name = newName.substring(0, 9);
@@ -1091,6 +1096,10 @@ document.querySelectorAll(".section .header").forEach(function(e) {
 
 // Initialize editable property as the XY property
 propertiesEl.xy.click();
+
+window.onbeforeunload = function() {
+	return "You may have unsaved changes. Are you sure you want to leave?";
+};
 
 /* Logic for handling URL parameters such as being editable or preloading from an ID */
 

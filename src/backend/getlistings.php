@@ -14,7 +14,7 @@
 					</a>
 					<div class=\"card-details\">
 						<p>" . $row["skin_name"] . "</p>
-						<a href=\"./profile?u=" . $row["skin_author"] . "\" class=\"author\">" . $row["skin_author"] . "</a>
+						<a href=\"./profile?u=" . $row["skin_author"] . "\" class=\"author\" target=\"_blank\">" . $row["skin_author"] . "</a>
 					</div>
 				</div>";
 			}
