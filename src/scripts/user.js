@@ -57,6 +57,11 @@ document.getElementById("signup-form").addEventListener("submit", function(evt) 
 					_this.querySelector(".user-input[name=\"username\"]").select();
 				} else if (res.type == 2) { // Email is invalid.
 					_this.querySelector(".user-input[name=\"email\"]").select();
+				} else if (res.type == 3) { // User account creation was successful.
+					var textboxes = _this.getElementsByClassName("user-input");
+					for (var i = 0; i < textboxes.length; i++) {
+						textboxes[i].value = "";
+					}
 				}
 			}
 		}

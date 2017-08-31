@@ -22,8 +22,10 @@
 			echo "{\"type\":2,\"text\":\"That email is invalid.\"}";
 			die();
 		} else { // If username doesn't exist, create account
-			echo "{\"type\":3,\"text\":\"Creating user account...\"}";
 			$sql2 = mysqli_query($con, "INSERT INTO users (user_name, user_pword" . (ISSET($_POST["email"]) ? ", user_email" : "") . ") VALUES (\"" . $_POST["username"] . "\", \"" . md5($_POST["password"]) . "\"" . (ISSET($_POST["email"]) ? ", \"" . $_POST["email"] . "\")" : ""));
+			if (mysqli_affected_rows($con) != 0) {
+				echo "{\"type\":3,\"text\":\"Your account has been created. You can now log in.\"}";
+			}
 		}
 	}
 ?>
