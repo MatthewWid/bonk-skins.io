@@ -29,7 +29,7 @@
 				include "./assets/imports/loginsignup/headerinfo.php";
 			?>
 			<span class="user hidden" id="madeby">Made by <span class="name"></span>.</span>
-			<div>
+			<div class="headerbuttons">
 				<?php
 					if (ISSET($_SESSION["login_user"])) {
 						echo "<button id=\"submitskin\" class=\"raised\" title=\"Save your skin to the database\">Submit Skin</button>";

@@ -7,8 +7,10 @@
 (function() {
 	var url = new URL(location.href);
 	var editDisabled = false;
+	var warnLeave = true;
 	if (url.searchParams.get("editable") != null && url.searchParams.get("editable") == "false") {
 		editDisabled = true;
+		warnLeave = false;
 		document.body.classList.add("no-edit");
 		document.getElementById("skin-title").disabled = true;
 	}
@@ -429,7 +431,8 @@
 				if (httpRequest.status === 200) {
 					console.log("Received response successfully - submitskin()");
 					console.log(httpRequest.responseText);
-					//location.href = "editor?id=" + parseInt(httpRequest.responseText) + "&editable=false";
+					warnLeave = false;
+					location.href = "editor?id=" + parseInt(httpRequest.responseText) + "&editable=false";
 
 					var imgHttpRequest = new XMLHttpRequest();
 					imgHttpRequest.onreadystatechange = function() {
@@ -961,7 +964,7 @@
 			script: function() {document.getElementById("tut-mousemover").classList.add("tut-active");return;}
 		},
 		{
-			e: "#header > div",
+			e: "#header > .headerbuttons",
 			text: "Click <b style=\"color: rgb(102, 160, 255);\">Submit Skin</b> to save your skin and upload it to the database.<br /><br />Click the <b style=\"color: rgb(255, 0, 0);\">download</b> button to download your skin to send to a friend.<br /><br />Click the <b style=\"color: rgb(105, 105, 105);\">upload</b> button to upload a skin data file to the editor.<br /><br />Click the <b style=\"color: rgb(204, 0, 219);\">image</b> button to download your skin as an image.",
 			offsetleft: 0,
 			script: function() {document.getElementById("tut-mousemover").classList.remove("tut-active");return;}
@@ -1098,11 +1101,11 @@
 	// Initialize editable property as the XY property
 	propertiesEl.xy.click();
 
-	if (!editDisabled) {
 		window.onbeforeunload = function() {
-			return "You may have unsaved changes. Are you sure you want to leave?";
+			if (warnLeave) {
+				return "You may have unsaved changes. Are you sure you want to leave?";
+			}
 		};
-	}
 
 	/* Logic for handling URL parameters such as being editable or preloading from an ID */
 
