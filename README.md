@@ -15,13 +15,13 @@ The project was started with the intention to learn
 * Server-side user input validation and cleansing
 * User login sessions
 * Advanced interactive applications (the skin editor)
-* Safe storing of user credentials
+* Storing of user credentials
 * File saving and loading
 * CSS Flexbox
 
 # The Skin Editor
 
-The skin editor code is in `./src/scripts/editor.js`. It is implemented with multiple JS canvasses stakced ontop of eachother that are merged into a single image when the skin is submitted.
+The skin editor code is in `./src/scripts/editor.js`. It is implemented with multiple JS canvasses stacked on top of eachother that are merged into a single image when the skin is submitted.
 
 <img src="./doc/skineditor.png" alt="drawing" width="100%" />
 
@@ -30,13 +30,13 @@ It features a fully interactive drag and drop interface whereby images can be pl
 Layers can be renamed, copied, ordered and deleted.
 
 Submitting a skin to the database will save the thumbnail as its own image, and its layer data will be saved as a JSON representation of the skin.  
-Skin data can be saved to files as a `.bskin` file which can be sent to friends and uploaded elsewhere.
+Skin data can be saved as a `.bskin` file which can be sent to friends and uploaded elsewhere, and then imported back into the site.
 
-The skin editor also features an interactive tutorial which walks the user through how to edit layers, shapes and posting your skin publicly.
+The skin editor also features an interactive tutorial which walks the user through how to edit layers, shapes and submitting your skin publicly.
 
 # Installation and Setup
 
-Server-side processing and database interactions are handled by PHP. Any Apache server will run.
+Server-side processing, rendering and database interactions are handled by PHP running off of an Apache server (XAMPP was used during development).
 
 To be able to connect to a database a configuration file must be created in `./src/assets/imports/config.php` which will define your connections and authentication to an SQL database.
 
@@ -52,4 +52,4 @@ Template `config.php`:
 
 Once this file is created with the correct credentials execute `bonk-skins.sql` on your database. This will create the tables `skins` and `users`.
 
-When this has been simply start up the Apache server and database server and navigate to `index.php`.
+When this has been done simply start up the Apache server and database server and navigate to `index.php`.
