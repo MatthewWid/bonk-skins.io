@@ -48,6 +48,7 @@ Template `config.php`:
   $server_user = "DB_USER";
   $server_password = "DB_PASS";
   $server_db = "DB_NAME";
+?>
 ```
 
 Once this file is created with the correct credentials execute `bonk-skins.sql` on your database. This will create the tables `skins` and `users`.
