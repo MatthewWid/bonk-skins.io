@@ -8,7 +8,7 @@ Each player can design and customise a “skin” (a design for their avatar) fo
 The project purpose is to have a website that is a user contributed database of bonk.io skins that users can **create**, **share**, and **vote** on to have a community of creators in a functioning and dynamic website.
 Users will use an in-site **skin editor** with a **drag and drop interface** that is then saved to a central database as a post, which can be voted up by other users and climb rankings over time.
 
-Made with **HTML**, **CSS**, **Javascript**, **PHP** and **SQL** to be hosted on an Apache server (XAMPP was used during development).
+Made with **HTML**, **CSS**, **Javascript**, **PHP** and **MySQL** hosted on an Apache server (XAMPP was used during development).
 
 The project was started with the intention to learn
 * Database concepts
