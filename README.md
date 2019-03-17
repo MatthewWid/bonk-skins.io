@@ -1,6 +1,6 @@
 <img src="./doc/logo.png" alt="drawing" width="50%" />
 
-*This project has been completed.* Voting is not fully implemented, however.
+## [See the live demo here](http://bonk-skins.herokuapp.com/)
 
 *bonk.io* is an online web-based multiplayer game whereby four players verse each other in a competition to hit each other off the screen.
 Each player can design and customise a “skin” (a design for their avatar) for themselves.
